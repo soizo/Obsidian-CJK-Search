@@ -1,96 +1,87 @@
-# CJK Search _(CJK-Search / cjk-search)_
+# CJK Search
 
-Match Simplified, Traditional, regional variant and compatibility characters in Obsidian's native Search, Find and Open file without changing your notes.
+Match Simplified, Traditional, variant and compatibility characters in Obsidian without converting your notes.
 
-CJK Search is an Obsidian plugin that preserves your original input, native results and highlighting while expanding character-equivalence matching.
+[简体中文](README.md)
 
-## Features
-
-- **Search**: match equivalent CJK characters across your vault.
-- **Find**: match equivalent characters in the current Markdown note; replacements still use native matching only.
-- **Quick switcher / Open file**: match equivalent characters in file names, paths and aliases while retaining native fuzzy search.
-- **Compatibility characters**: optionally match characters such as `①／1`, `²／2`, `Ａ／A` and `ﬃ／ffi`.
-- Does not modify notes, upload search content or require a runtime network connection.
-
-For example, searching for `体` can also find `體`; searching for `发` can also find `發` and `髮`.
+Searching for `体` also finds `體`; searching for `发` also finds `發` and `髮`. The plugin extends Obsidian's existing Search, Find and Quick switcher. There is no separate search window, and your notes stay unchanged.
 
 ## Installation
 
-The current version requires Obsidian **1.13.7 or later**. The plugin uses Obsidian's internal search interfaces, so a disposable test vault is recommended.
+Requires Obsidian 1.13.7 or later. The plugin relies on Obsidian's internal interfaces, so try it in a test vault first.
 
-### Manual installation
-
-1. Build the plugin, or obtain an existing build from `dist/`.
-2. Create `.obsidian/plugins/cjk-search-probe/` in the target vault.
-3. Copy the following files into that directory:
+1. Download `cjk-search-v<version>.zip` from [Releases](https://github.com/soizo/Obsidian-CJK-Search/releases). If no release is available yet, follow the build instructions below.
+2. Create `.obsidian/plugins/cjk-search-probe/` inside your vault and extract the ZIP there. Do not add an extra enclosing folder:
 
    ```text
-   main.js
-   manifest.json
-   THIRD_PARTY_NOTICES.md
-   LICENSES/
-   ├── Unicode-LICENSE.txt
-   └── OpenCC-LICENSE.txt
+   .obsidian/plugins/cjk-search-probe/
+   ├── main.js
+   ├── manifest.json
+   ├── THIRD_PARTY_NOTICES.md
+   └── LICENSES/
+       ├── Unicode-LICENSE.txt
+       └── OpenCC-LICENSE.txt
    ```
 
-4. Enable the plugin in **Settings → Community plugins**.
-5. Open **Settings → CJK Search** and enable the features you want.
+3. Restart Obsidian and enable CJK Search under Settings → Community plugins.
 
-Keep the existing `data.json` when updating the plugin. Your notes do not need to be converted or rewritten.
+To update, disable the plugin, replace the files listed above, then enable it again. Keep any existing `data.json` in the plugin directory: it contains your settings.
 
 ## Usage
 
+Use Obsidian's search commands as usual:
+
 ```text
-⌘⇧F       Native vault Search
-⌘F        Find in the current Markdown note
-⌘O        Open file
+⌘⇧F    Search the vault
+⌘F     Find in the current Markdown note
+⌘O     Open the Quick switcher
 ```
 
-Use the corresponding `Ctrl` shortcuts on Windows/Linux; the actual shortcuts are controlled by Obsidian.
+Use `Ctrl` on Windows and Linux. If you have changed your shortcuts, use those configured in Obsidian.
 
-The four plugin settings are independent:
+Under Settings → CJK Search, you can toggle each feature separately:
 
-- **Search**: enhance vault Search.
-- **Find**: enhance Find in the current Markdown note.
-- **Quick switcher**: enhance file names, paths and aliases.
-- **Compatibility characters**: additionally match compatibility characters.
+| Setting | What it does |
+| --- | --- |
+| Search | Match equivalent characters across the vault |
+| Find | Match equivalent characters in the current note; replacements still use Obsidian's original rules |
+| Quick switcher | Match equivalent characters in file names, paths and aliases, alongside native fuzzy search |
+| Compatibility characters | Also match pairs such as `① / 1`, `² / 2`, `Ａ / A` and `ﬃ / ffi` |
 
-Disabling any of the first three restores native behaviour for that entry point. Enter the query again after changing a setting. If Search or Quick switcher is not enabled under Obsidian's Core plugins, enable it first; this plugin does not change core settings for you.
+The switches are independent. Turning off an enhancement restores the original behaviour for that search feature. Re-enter your query after changing a setting. Search and Quick switcher must also be enabled in Obsidian's Core plugins.
 
-## Limitations
+## Known limitations
 
-- Verified on macOS / Obsidian 1.13.7; the new iOS entry points still require user re-testing, and Android, Windows and Linux have not completed acceptance testing.
-- Does not enhance Graph View search/filtering, PDF, Canvas, Bases, web pages or embedded editors.
-- Does not perform regional phrase conversion, look-alike matching or complete NFKC normalisation.
-- Complex Search queries such as `path:`, `file:`, quotes, brackets, negation and regular expressions retain native behaviour.
-- Uses filtered data from Unicode **18.0.0** and OpenCC **1.4.2**; this does not claim coverage of every regional standard or all variant characters.
+- Tested on macOS with Obsidian 1.13.7. Find and Quick switcher on iOS still need re-testing; Android, Windows and Linux have not been fully verified.
+- Does not extend Graph view search or filtering, or support PDF, Canvas, Bases, web pages or embedded editors.
+- Complex vault queries containing `path:`, `file:`, quotes, brackets, negation or regular expressions follow Obsidian's original rules.
+- Matches equivalent characters only. It does not convert regional phrases, match look-alike characters or perform full NFKC normalisation.
+- Character data is selected from Unicode 18.0.0 and OpenCC 1.4.2. It does not cover every variant character or regional standard.
 
-For full verification results, data sources and known limitations, see:
+See the [verification report](docs/research/user-settings.md), [data report](data/report.json) and [project status](TODO.md) for details.
 
-- [Verification report](docs/research/user-settings.md)
-- [Data report](data/report.json)
-- [Project status](TODO.md)
-- [Third-party data notices](THIRD_PARTY_NOTICES.md)
+## Privacy and reporting issues
 
-## Privacy and diagnostics
+The plugin does not connect to the network at runtime, upload search content or logs, or rewrite notes. Diagnostic logs do not include search text, note contents or paths.
 
-The plugin does not connect to the network at runtime, upload logs, read note contents or rewrite notes. Diagnostic logs do not contain search text, note contents or paths.
+For diagnostics, run `CJK Search: Print diagnostics` from the command palette, then filter for `[CJK-Probe]` in the developer-tool Console. Check for private information before sharing any logs.
 
-For troubleshooting, open Obsidian's developer-tool Console and filter for `[CJK-Probe]`, or run **CJK Search: Print diagnostics** from the command palette. When reporting an issue, include the Obsidian version, platform, a reproducible query and redacted diagnostics.
+Questions, bug reports and suggestions are welcome in [Issues](https://github.com/soizo/Obsidian-CJK-Search/issues), as are pull requests. For a bug report, include your Obsidian version, operating system, the affected feature, and a small example showing the problem and expected result.
 
-## Contributing
+## Building from source
 
-Reproducible issues, character-equivalence suggestions and code improvements are welcome. Please include:
+You need Node.js 22, npm and Python 3. Run these commands in the project directory:
 
-- Obsidian version and operating system;
-- the entry point used (Search, Find or Open file);
-- the smallest reproducing text and expected result;
-- redacted diagnostic information.
+```sh
+npm ci
+npm test
+npm run build
+```
 
-Implementation details, data generation and automated verification are documented in `docs/` and the project scripts. Preserve the Unicode and OpenCC notices and licence files when contributing.
+The build is written to `dist/`. Copy all its contents into the plugin directory shown above. Generated character data is already included in the repository; a normal build does not need to regenerate it.
 
 ## Licence
 
-The project code is released under the [MIT License](LICENSE), SPDX identifier `MIT`. Copyright belongs to CJK Search contributors.
+The code is released under the [MIT](LICENSE) licence. Copyright belongs to CJK Search contributors.
 
-Derived data bundled with the plugin remains subject to its upstream licences: Unicode data uses Unicode License V3, and OpenCC data uses the Apache License 2.0. When distributing the plugin, retain [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and the files in [LICENSES/](LICENSES/).
+Bundled data is subject to its upstream licences: Unicode uses Unicode License V3, and OpenCC uses Apache License 2.0. Retain the [third-party notices](THIRD_PARTY_NOTICES.md) and the licence files in [LICENSES/](LICENSES/) when distributing the plugin.

@@ -1,98 +1,87 @@
-# CJK Search _(CJK-Search / cjk-search)_
+# CJK Search
 
-在 Obsidian 原生搜索、Find 和 Open file 中匹配简繁、地区异体及兼容字符，不改写你的笔记。
+让 Obsidian 搜索同时匹配简繁体、异体字和兼容字符，无需转换笔记。
 
-[English (British)](README.en-GB.md)
+[English](README.en-GB.md)
 
-CJK Search 是一个 Obsidian 插件：它保留你输入的原文、原生结果与高亮，同时扩展字符等价匹配。
-
-## 功能
-
-- **Search**：在全库搜索中匹配等价 CJK 字符。
-- **Find**：在当前 Markdown 笔记中匹配等价字符；替换仍完全使用原生匹配。
-- **Quick switcher / Open file**：在文件名、路径和别名中匹配等价字符，并保留原生模糊搜索。
-- **Compatibility characters**：可选匹配 `①／1`、`²／2`、`Ａ／A`、`ﬃ／ffi` 等兼容字符。
-- 不修改笔记，不上传搜索内容，不依赖运行时网络连接。
-
-例如，搜索 `体` 也可以找到 `體`，搜索 `发` 也可以找到 `發` 和 `髮`。
+搜索 `体` 可以找到 `體`，搜索 `发` 可以找到 `發` 和 `髮`。插件直接扩展 Obsidian 原有的搜索、当前笔记查找和快速切换功能，不需要另开搜索窗口，也不会改写笔记。
 
 ## 安装
 
-当前版本需要 Obsidian **1.13.7 或更新版本**。插件使用 Obsidian 的内部搜索接口，建议先在可丢弃的测试库中安装。
+需要 Obsidian 1.13.7 或更新版本。插件依赖 Obsidian 的内部接口，建议先在测试库中试用。
 
-### 手动安装
-
-1. 从项目构建插件，或取得已有的 `dist/` 构建产物。
-2. 在目标库中创建目录 `.obsidian/plugins/cjk-search-probe/`。
-3. 将以下文件复制到该目录：
+1. 在 [Releases](https://github.com/soizo/Obsidian-CJK-Search/releases) 下载 `cjk-search-v<版本>.zip`。如果还没有发布版本，可以按下方说明从源码构建。
+2. 在仓库中创建 `.obsidian/plugins/cjk-search-probe/`，将 ZIP 解压到这个目录。不要再套一层文件夹：
 
    ```text
-   main.js
-   manifest.json
-   THIRD_PARTY_NOTICES.md
-   LICENSES/
-   ├── Unicode-LICENSE.txt
-   └── OpenCC-LICENSE.txt
+   .obsidian/plugins/cjk-search-probe/
+   ├── main.js
+   ├── manifest.json
+   ├── THIRD_PARTY_NOTICES.md
+   └── LICENSES/
+       ├── Unicode-LICENSE.txt
+       └── OpenCC-LICENSE.txt
    ```
 
-4. 在 Obsidian 的 **设置 → 第三方插件** 中启用插件。
-5. 打开 **设置 → CJK Search**，按需启用各项功能。
+3. 重启 Obsidian，在「设置 → 第三方插件」中启用 CJK Search。
 
-更新插件时请保留已有的 `data.json`。笔记不需要转换或重写。
+更新时先禁用插件，用新版本覆盖上述文件，再重新启用。保留目录中已有的 `data.json`，它保存了你的设置。
 
 ## 使用
 
+照常使用 Obsidian 的搜索功能即可：
+
 ```text
-⌘⇧F       原生全库搜索
-⌘F        当前 Markdown 笔记 Find
-⌘O        Open file
+⌘⇧F    搜索整个仓库
+⌘F     在当前 Markdown 笔记中查找
+⌘O     快速切换文件
 ```
 
-Windows/Linux 使用对应的 `Ctrl` 快捷键；具体快捷键以 Obsidian 设置为准。
+Windows 和 Linux 对应使用 `Ctrl`；如果你改过快捷键，以 Obsidian 的设置为准。
 
-插件设置中的四个开关彼此独立：
+在「设置 → CJK Search」中可以分别开关以下功能：
 
-- **Search**：全库搜索增强。
-- **Find**：当前 Markdown 笔记查找增强。
-- **Quick switcher**：文件名、路径及别名增强。
-- **Compatibility characters**：额外匹配兼容字符。
+| 设置 | 作用 |
+| --- | --- |
+| Search | 在全库搜索中匹配等价字符 |
+| Find | 在当前笔记中匹配等价字符；替换仍使用 Obsidian 原有规则 |
+| Quick switcher | 在文件名、路径和别名中匹配等价字符，保留原有模糊搜索 |
+| Compatibility characters | 额外匹配 `① / 1`、`² / 2`、`Ａ / A`、`ﬃ / ffi` 等兼容字符 |
 
-前三项关闭后，对应入口恢复原生行为。改变设置后重新输入查询。若 Search 或 Quick switcher 未在 Obsidian 的 Core plugins 中启用，请先启用它们；插件不会代为修改核心配置。
+这些开关互不影响。关闭某个搜索入口的增强后，该入口恢复原有行为。修改设置后，请重新输入查询。Search 和 Quick switcher 还需要在 Obsidian 的核心插件中启用。
 
-## 限制
+## 已知限制
 
-- 当前已在 macOS / Obsidian 1.13.7 上验证；iOS 新入口等待用户复测，Android、Windows 和 Linux 尚未完成验收。
-- 不增强 Graph View 搜索／过滤、PDF、Canvas、Bases、网页或嵌入编辑器。
-- 不进行地区词汇转换、形似混淆匹配或完整 NFKC 规范化。
-- 复杂 Search 查询（如 `path:`、`file:`、引号、括号、否定和正则）保持原生行为。
-- 使用 Unicode **18.0.0** 和 OpenCC **1.4.2** 的筛选数据；这不代表覆盖所有地区标准或全部异体字。
+- 目前已在 macOS / Obsidian 1.13.7 上验证。iOS 的查找和快速切换功能仍待复测，Android、Windows 和 Linux 尚未完成验证。
+- 不增强关系图搜索与过滤，也不支持 PDF、Canvas、Bases、网页或嵌入编辑器。
+- 带有 `path:`、`file:`、引号、括号、否定或正则表达式的复杂全库查询，仍按 Obsidian 原有规则处理。
+- 只处理字符等价关系，不做地区词汇转换、形似字匹配或完整的 NFKC 规范化。
+- 字符数据筛选自 Unicode 18.0.0 和 OpenCC 1.4.2，并不覆盖所有异体字或地区标准。
 
-完整的验证结果、数据来源和已知限制见：
+详细记录见[验证报告](docs/research/user-settings.md)、[数据报告](data/report.json)和[项目进度](TODO.md)。
 
-- [验证报告](docs/research/user-settings.md)
-- [数据报告](data/report.json)
-- [项目进度](TODO.md)
-- [第三方数据声明](THIRD_PARTY_NOTICES.md)
+## 隐私与问题反馈
 
-## 隐私与诊断
+插件运行时不联网，不上传搜索内容或日志，也不会改写笔记。诊断日志不包含搜索原文、笔记内容或路径。
 
-插件运行时不联网，不上传日志，不读取或改写笔记。诊断日志不会输出搜索原文、笔记内容或路径。
+遇到问题时，可以在命令面板运行 `CJK Search: Print diagnostics`，然后在开发者工具的 Console 中筛选 `[CJK-Probe]`。提交日志前仍请检查并移除私人信息。
 
-如需排查问题，可在 Obsidian 中打开开发者工具的 Console，筛选 `[CJK-Probe]`，或执行命令面板中的 **CJK Search: Print diagnostics**。反馈问题时请附上 Obsidian 版本、平台、可复现查询和脱敏后的诊断信息。
+欢迎通过 [Issues](https://github.com/soizo/Obsidian-CJK-Search/issues) 反馈问题或建议，或提交 Pull Request。报告问题时请提供 Obsidian 版本、操作系统、出问题的功能，以及能复现问题的最小示例和预期结果。
 
-## 贡献
+## 从源码构建
 
-欢迎提交可复现的问题、字符关系建议和代码改进。请先说明：
+需要 Node.js 22、npm 和 Python 3。在项目目录中运行：
 
-- Obsidian 版本与操作系统；
-- 使用的入口（Search、Find 或 Open file）；
-- 最小复现文本与预期结果；
-- 脱敏后的诊断信息。
+```sh
+npm ci
+npm test
+npm run build
+```
 
-实现细节、数据构建和自动化验证见 `docs/` 与项目脚本。提交贡献时请保留 Unicode 与 OpenCC 的第三方声明及许可证文件。
+构建产物在 `dist/`，将其中所有文件复制到上面的插件目录即可。仓库已包含生成好的字符数据，普通构建不需要重新生成。
 
 ## 许可
 
-本项目代码采用 [MIT License](LICENSE)，SPDX 标识符为 `MIT`。版权归 CJK Search contributors 所有。
+代码采用 [MIT](LICENSE) 许可，版权归 CJK Search contributors 所有。
 
-插件中包含的派生数据仍受其上游许可约束：Unicode 数据采用 Unicode License V3，OpenCC 数据采用 Apache License 2.0。分发时请一并保留 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 与 [LICENSES/](LICENSES/) 中的文件。
+随插件分发的数据另受上游许可约束：Unicode 使用 Unicode License V3，OpenCC 使用 Apache License 2.0。分发插件时请保留[第三方声明](THIRD_PARTY_NOTICES.md)及 [LICENSES/](LICENSES/) 中的许可证文件。
