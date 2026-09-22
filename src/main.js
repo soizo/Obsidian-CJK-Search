@@ -1,13 +1,15 @@
 'use strict';
 const { Plugin, Component, Notice, PluginSettingTab, Setting, Platform, apiVersion,
-  prepareFuzzySearch, prepareSimpleSearch, parseFrontMatterAliases } = require('obsidian');
+  prepareFuzzySearch, prepareSimpleSearch, parseFrontMatterAliases, getLanguage } = require('obsidian');
 const { createExpander } = require('./matcher.js');
 const { installFind } = require('./find.js');
 const { installOpenFile } = require('./open-file.js');
+const { installGraph } = require('./graph.js');
+const { installEditorSuggestions } = require('./editor-suggest.js');
 const data = require('../data/character-data.json');
-const text = require('./strings.js');
-const DEFAULT_SETTINGS = {searchEnabled:true, findEnabled:true, quickSwitcherEnabled:true, fullCompatibility:true};
-const build = 'user-settings-0.3.0';
+const { localeIds, getStrings } = require('./strings.js');
+const DEFAULT_SETTINGS = {language:'auto', searchEnabled:true, findEnabled:true, quickSwitcherEnabled:true, graphEnabled:true, graphAdvancedQueries:false, tagsEnabled:true, internalLinksEnabled:true, fullCompatibility:true};
+const build = 'editor-suggestions-0.5.0';
 
 function log(event, details = {}, level = 'info') {
   if (level === 'info' && event !== 'diagnostics') return;
@@ -18,8 +20,16 @@ log('module-evaluated', { build });
 class CompatibilitySettings extends PluginSettingTab {
   display() {
     this.containerEl.empty();
+    const text = this.plugin.getText();
     new Setting(this.containerEl).setName(text.enhancements).setDesc(text.introduction).setHeading();
-    for (const [key, core] of [['searchEnabled','global-search'],['findEnabled',null],['quickSwitcherEnabled','switcher'],['fullCompatibility',null]]) {
+    new Setting(this.containerEl).setName(text.language.name).setDesc(text.language.description)
+      .addDropdown(dropdown => dropdown.addOptions(text.language.options).setValue(this.plugin.settings.language).onChange(async value => {
+        dropdown.setDisabled(true);
+        try { await this.plugin.setSetting('language', value); }
+        catch { dropdown.setValue(this.plugin.settings.language); }
+        finally { dropdown.setDisabled(false); }
+      }));
+    for (const [key, core] of [['searchEnabled','global-search'],['findEnabled',null],['quickSwitcherEnabled','switcher'],['graphEnabled','graph'],['graphAdvancedQueries',null],['tagsEnabled',null],['internalLinksEnabled',null],['fullCompatibility',null]]) {
       if (key === 'fullCompatibility') new Setting(this.containerEl).setName(text.matching).setHeading();
       const copy = text.settings[key];
       const unavailable = core && !this.app.internalPlugins?.getEnabledPluginById?.(core);
@@ -43,6 +53,8 @@ module.exports = class CjkSearchPlugin extends Plugin {
     this.warned = new Set();
     this.nextViewId = 1;
     this.settings = {...DEFAULT_SETTINGS};
+    this.text = getStrings('auto', getLanguage());
+    this.diagnosticsCommand = null;
     this.settingWrites = Promise.resolve();
     this.surfaceEvents = {};
     this.savedSettings = {};
@@ -51,12 +63,16 @@ module.exports = class CjkSearchPlugin extends Plugin {
       if (saved && typeof saved === 'object' && !Array.isArray(saved)) this.savedSettings = saved;
       for (const key of Object.keys(DEFAULT_SETTINGS)) {
         const value = this.savedSettings[key];
-        if (typeof value === 'boolean') this.settings[key] = value;
+        if (key === 'language') {
+          if (value === 'auto' || localeIds.includes(value)) this.settings[key] = value;
+          else if (value !== undefined) log('settings-invalid', {setting:key, action:'using-default-mode'}, 'warn');
+        } else if (typeof value === 'boolean') this.settings[key] = value;
         else if (value !== undefined) log('settings-invalid', {setting:key, action:'using-default-mode'}, 'warn');
       }
+    this.refreshText();
     } catch {
       log('settings-load-failed', { action: 'using-default-mode' }, 'warn');
-      this.warn('settings-load-failed', text.errors.settingsLoad);
+      this.warn('settings-load-failed', this.getText().errors.settingsLoad);
     }
     if (!this.active) return;
     const started = performance.now();
@@ -64,7 +80,7 @@ module.exports = class CjkSearchPlugin extends Plugin {
     catch {
       this.expander = null;
       log('data-invalid', { action: 'native-search-unchanged' }, 'error');
-      this.warn('data-invalid', text.errors.dataInvalid);
+      this.warn('data-invalid', this.getText().errors.dataInvalid);
     }
     log('loaded', { build, version: this.manifest.version, obsidianApi: apiVersion,
       platform: Platform.isIosApp ? 'ios' : Platform.isAndroidApp ? 'android' : 'desktop',
@@ -72,8 +88,8 @@ module.exports = class CjkSearchPlugin extends Plugin {
       characters: Object.fromEntries(Object.entries(data?.modes ?? {}).map(([mode, value]) => [mode, value?.entries?.length ?? 0])),
       dataReady: !!this.expander, fullCompatibility: this.settings.fullCompatibility,
       dataInitMs: +(performance.now() - started).toFixed(2), rawQueryLogging: false });
-    this.addCommand({ id: 'print-diagnostics', name: text.diagnostics, callback: () => {
-      this.printDiagnostics(); new Notice(text.diagnosticsPrinted);
+    this.diagnosticsCommand = this.addCommand({ id: 'print-diagnostics', name: this.getText().diagnostics, callback: () => {
+      this.printDiagnostics(); new Notice(this.getText().diagnosticsPrinted);
     } });
     this.addSettingTab(new CompatibilitySettings(this.app, this));
     this.reportSurface = (event, details, level) => {
@@ -82,6 +98,10 @@ module.exports = class CjkSearchPlugin extends Plugin {
     };
     this.updateEnhancement('findEnabled');
     this.updateEnhancement('quickSwitcherEnabled');
+    this.updateEnhancement('graphEnabled');
+    this.updateEnhancement('tagsEnabled');
+    this.register(() => this.stopEditorSuggestions?.());
+    this.register(() => this.graphController?.dispose());
     this.register(() => this.stopFind?.());
     this.register(() => this.stopQuickSwitcher?.());
     this.registerEvent(this.app.workspace.on('layout-change', () => this.attachViews('layout-change')));
@@ -112,19 +132,24 @@ module.exports = class CjkSearchPlugin extends Plugin {
   setFullCompatibility(enabled) { return this.setSetting('fullCompatibility',enabled); }
 
   async setSetting(key, enabled) {
-    if (!Object.prototype.hasOwnProperty.call(DEFAULT_SETTINGS,key) || typeof enabled !== 'boolean')
-      throw new TypeError('Unsupported setting');
+    if (key === 'language') {
+      if (typeof enabled !== 'string' || (enabled !== 'auto' && !localeIds.includes(enabled))) throw new TypeError('Unsupported language');
+    } else if (!Object.prototype.hasOwnProperty.call(DEFAULT_SETTINGS,key) || typeof enabled !== 'boolean') throw new TypeError('Unsupported setting');
     // Serialize disk writes so quickly changing different toggles loses no choice.
     const operation = this.settingWrites.then(async () => {
       const next = {...this.savedSettings,[key]:enabled};
       try { await this.saveData(next); }
       catch {
         log('settings-save-failed', {setting:key}, 'error');
-        new Notice(text.errors.settingsSave);
+        new Notice(this.getText().errors.settingsSave);
         throw new Error('settings-save-failed');
       }
       this.savedSettings = next;
       this.settings[key] = enabled;
+      if (key === 'language') {
+        this.refreshText();
+        this.settingTab?.display?.();
+      }
       if (this.active) this.updateEnhancement(key);
       log('settings-changed', {setting:key,enabled,applies:'next-query'});
     });
@@ -141,6 +166,15 @@ module.exports = class CjkSearchPlugin extends Plugin {
         this.stopQuickSwitcher?.();
         this.stopQuickSwitcher = this.settings.quickSwitcherEnabled
           ? installOpenFile(this,this.reportSurface,{prepareFuzzySearch,prepareSimpleSearch,parseFrontMatterAliases}) : null;
+      } else if (key === 'tagsEnabled' || key === 'internalLinksEnabled') {
+        this.stopEditorSuggestions?.();
+        this.stopEditorSuggestions = this.settings.tagsEnabled || this.settings.internalLinksEnabled
+          ? installEditorSuggestions(this,this.reportSurface,{prepareFuzzySearch,prepareSimpleSearch}) : null;
+      } else if (key === 'graphEnabled') {
+        this.graphController?.dispose();
+        this.graphController = this.settings.graphEnabled ? installGraph(this,this.reportSurface) : null;
+      } else if (key === 'graphAdvancedQueries' || key === 'fullCompatibility') {
+        this.graphController?.refresh();
       } else if (key === 'searchEnabled') {
         if (this.settings.searchEnabled) this.attachViews('settings-changed');
         else {
@@ -150,8 +184,15 @@ module.exports = class CjkSearchPlugin extends Plugin {
       }
     } catch {
       log('native-fallback',{surface:'settings',reason:'update-interface-error'},'warn');
-      new Notice(text.errors.enhancementUpdate);
+      new Notice(this.getText().errors.enhancementUpdate);
     }
+  }
+
+  getText() { return this.text; }
+
+  refreshText() {
+    this.text = getStrings(this.settings.language, getLanguage());
+    if (this.diagnosticsCommand) this.diagnosticsCommand.name = this.text.diagnostics;
   }
 
   printDiagnostics() {
@@ -159,7 +200,7 @@ module.exports = class CjkSearchPlugin extends Plugin {
     log('diagnostics', { build, version: this.manifest.version, obsidianApi: apiVersion,
       unicodeVersion: data?.unicodeVersion, openccVersion: data?.openccVersion,
       dataReady: !!this.expander, fullCompatibility: this.settings.fullCompatibility,
-      enhancements: {search:this.settings.searchEnabled,find:this.settings.findEnabled,quickSwitcher:this.settings.quickSwitcherEnabled},
+      enhancements: {search:this.settings.searchEnabled,find:this.settings.findEnabled,quickSwitcher:this.settings.quickSwitcherEnabled,graph:this.settings.graphEnabled,graphAdvancedQueries:this.settings.graphAdvancedQueries,tags:this.settings.tagsEnabled,internalLinks:this.settings.internalLinksEnabled},
       searchViews: leaves.length, rawQueryLogging: false, lastSurfaceEvents: this.surfaceEvents,
       views: leaves.map(({ view }) => {
         const record = this.patched.get(view);
@@ -187,7 +228,7 @@ module.exports = class CjkSearchPlugin extends Plugin {
       const original = view.renderSearchInfo;
       if (typeof original !== 'function') {
         log('incompatible-view', { missing: 'renderSearchInfo', action: 'native-search-unchanged' }, 'warn');
-        this.warn('incompatible-view', text.errors.incompatible);
+        this.warn('incompatible-view', this.getText().errors.incompatible);
         continue;
       }
       const component = this.addChild(new Component());
@@ -230,7 +271,7 @@ module.exports = class CjkSearchPlugin extends Plugin {
             } else if (expanded.status === 'fallback') {
               record.counts.fallbacks++;
               log('native-fallback', { view: record.id, reason: expanded.reason, nodes: expanded.nodes }, 'warn');
-              plugin.warn(expanded.reason, text.errors.limit);
+              plugin.warn(expanded.reason, plugin.getText().errors.limit);
             } else {
               record.counts.skipped++;
               log('skipped', { view: record.id, reason: expanded.reason, queryLength: query.query.length });
@@ -242,7 +283,7 @@ module.exports = class CjkSearchPlugin extends Plugin {
             record.counts.fallbacks++;
             record.lastOutcome = 'native-fallback';
             log('native-fallback', { view: record.id, stage: 'compile-matcher', reason: 'native-interface-error' }, 'error');
-            plugin.warn('native-interface-error', text.errors.nativeInterface);
+            plugin.warn('native-interface-error', plugin.getText().errors.nativeInterface);
           }
         }
         return original.apply(this, args);

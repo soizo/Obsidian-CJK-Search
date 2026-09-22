@@ -1,0 +1,52 @@
+{
+  "enhancements": "搜索增强",
+  "introduction": "匹配等價字符，不改變原文。",
+  "matching": "字符匹配",
+  "nextSearch": "更改將在下次搜索時生效。",
+  "settings": {
+    "searchEnabled": {
+      "name": "搜索", "description": "搜索整個倉庫。",
+      "unavailable": "搜索已禁用。請在核心插件中啟用搜索以使用此功能。"
+    },
+    "findEnabled": {
+      "name": "查找", "description": "在當前 Markdown 筆記中查找。替换行為保持不變。"
+    },
+    "quickSwitcherEnabled": {
+      "name": "快速切换", "description": "匹配文件名、路徑和别名。",
+      "unavailable": "快速切换已禁用。請在核心插件中啟用快速切换以使用此功能。"
+    },
+    "graphEnabled": {
+      "name": "關係圖譜", "description": "在全局和局部關係圖譜的篩選條件與分組中匹配等價字符。",
+      "unavailable": "請在核心插件中啟用關係圖譜以使用此功能。"
+    },
+    "graphAdvancedQueries": {
+      "name": "圖譜高級查詢",
+      "description": "也在 path:、file: 和 tag: 篩選條件中匹配等價字符。排除條件也會涵蓋等價形式。需要啟用關係圖譜增强。"
+    },
+    "tagsEnabled": {
+      "name": "標籤", "description": "在 Markdown 編輯器中輸入 # 後，建議等價標籤。插入時保留原標籤。"
+    },
+    "internalLinksEnabled": {
+      "name": "内部鏈接", "description": "輸入 [[ 後，建議等價文件名、路徑和别名。標題、塊引用和顯示文本保持不變。"
+    },
+    "fullCompatibility": {
+      "name": "兼容字符",
+      "description": "也匹配 ① / 1、Ａ / A 和 ﬃ / ffi 等形式。關閉此選項不會改變内置匹配行為。"
+    }
+  },
+  "diagnostics": "輸出診斷信息",
+  "diagnosticsPrinted": "診斷信息已寫入控制台。可按 [CJK-Probe] 篩選。",
+  "errors": {
+    "settingsLoad": "無法加載設置。本次會話使用默認值；你的設置文件未被更改。",
+    "settingsSave": "無法保存此設置。之前的選擇仍然生效。請檢查倉庫訪問權限後重試。",
+    "dataInvalid": "無法加載字符數據。内置搜索保持不變。請重新加載 CJK Search 後重試。",
+    "incompatible": "不支持此搜索接口。内置搜索保持不變。可使用“輸出診斷信息”協助排查。",
+    "limit": "此查詢超出增强限制。本次查詢使用内置搜索。",
+    "nativeInterface": "無法增强搜索，已使用内置搜索。可使用“輸出診斷信息”協助排查。",
+    "enhancementUpdate": "無法更新搜索增强。請重新加載 CJK Search 後重試。"
+  },
+  "language": {
+    "name": "語言", "description": "選擇插件界面語言，不改變搜索匹配規則。", "auto": "跟隨 Obsidian",
+    "options": {"auto":"跟隨 Obsidian","zh-Hans":"簡體中文","zh-Hant-CN":"繁體中文（大陸）","zh-Hant-TW":"繁體中文（臺灣）","zh-Hant-HK":"繁體中文（香港）","en-GB":"英語（英國）","ja":"日語","ko-KR":"韓語","ko-KP":"朝鮮語","vi":"越南語"}
+  }
+}

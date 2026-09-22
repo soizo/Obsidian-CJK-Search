@@ -4,13 +4,13 @@
 
 [English](README.en-GB.md)
 
-搜索 `体` 可以找到 `體`，搜索 `发` 可以找到 `發` 和 `髮`。插件直接扩展 Obsidian 原有的搜索、当前笔记查找和快速切换功能，不需要另开搜索窗口，也不会改写笔记。
+在 Obsidian 原生搜索、Find、Open file、Graph view 及标签／双链补全中匹配简繁、地区异体及兼容字符，保留输入原文和原生界面。插件 ID 为 `cjk-search-probe`，界面名称为 **CJK Search**。
 
 ## 安装
 
 需要 Obsidian 1.13.7 或更新版本。插件依赖 Obsidian 的内部接口，建议先在测试库中试用。
 
-1. 在 [Releases](https://github.com/soizo/Obsidian-CJK-Search/releases) 下载 `cjk-search-v<版本>.zip`。如果还没有发布版本，可以按下方说明从源码构建。
+1. 在 [Releases](https://github.com/soizo/Obsidian-CJK-Search/releases) 下载 `cjk-search-v<版本>.zip`。
 2. 在仓库中创建 `.obsidian/plugins/cjk-search-probe/`，将 ZIP 解压到这个目录。不要再套一层文件夹：
 
    ```text
@@ -30,36 +30,42 @@
 
 ## 使用
 
-照常使用 Obsidian 的搜索功能即可：
-
 ```text
-⌘⇧F    搜索整个仓库
-⌘F     在当前 Markdown 笔记中查找
-⌘O     快速切换文件
+⌘⇧F → 原生全库搜索
+⌘F  → 当前 Markdown 笔记 Find（编辑／实时预览／阅读）
+⌘O  → Open file（文件名／路径／别名，保留原生模糊匹配）
 ```
 
-Windows 和 Linux 对应使用 `Ctrl`；如果你改过快捷键，以 Obsidian 的设置为准。
+Windows/Linux 对应使用 Ctrl；以宿主实际快捷键设置为准。
 
-在「设置 → CJK Search」中可以分别开关以下功能：
+搜索 `体` 可以找到 `體`，搜索 `发` 可以找到 `發` 和 `髮`。插件不需要另开搜索窗口，也不会改写笔记。
 
-| 设置 | 作用 |
-| --- | --- |
-| Search | 在全库搜索中匹配等价字符 |
-| Find | 在当前笔记中匹配等价字符；替换仍使用 Obsidian 原有规则 |
-| Quick switcher | 在文件名、路径和别名中匹配等价字符，保留原有模糊搜索 |
-| Compatibility characters | 额外匹配 `① / 1`、`² / 2`、`Ａ / A`、`ﬃ / ffi` 等兼容字符 |
+设置 → **CJK Search**：
 
-这些开关互不影响。关闭某个搜索入口的增强后，该入口恢复原有行为。修改设置后，请重新输入查询。Search 和 Quick switcher 还需要在 Obsidian 的核心插件中启用。
+- **Language**：跟随 Obsidian 或手动选择九种语言。繁体中文（大陆）按指定的《通用规范汉字表》规范繁体方案生成；台湾、香港版本由 OpenCC 1.4.2 转换生成。
+- **Search**：全库搜索增强。
+- **Find**：当前 Markdown 笔记查找增强。
+- **Quick switcher**：文件名、路径及别名增强。
+- **Graph view**：全局／局部图谱的 Filters 和 Groups 增强。
+- **Advanced graph queries**：仅为图谱增强 `path:`、`file:`、`tag:` 及原生逻辑组合，默认关闭。
+- **Tags**：Markdown 编辑器输入 `#` 时的标签补全增强。
+- **Internal links**：输入 `[[` 时，增强文件名、路径和别名补全。
+- **Compatibility characters**：额外匹配 `①／1`、`²／2`、`Ａ／A`、`ﬃ／ffi` 等。
+
+除 Advanced graph queries 外均默认开启，已保存的 true／false 保持不变。各入口独立控制；关闭 Graph view 后，高级选项保留偏好但不生效。若原生 Search、Quick switcher 或 Graph view 未启用，请在 **Core plugins** 中开启。
+
+关闭全量只移除插件新增关系，不禁用原生固有能力。替换仍完全使用原生匹配，不扩大替换范围。
 
 ## 已知限制
 
-- 目前已在 macOS / Obsidian 1.13.7 上验证。iOS 的查找和快速切换功能仍待复测，Android、Windows 和 Linux 尚未完成验证。
-- 不增强关系图搜索与过滤，也不支持 PDF、Canvas、Bases、网页或嵌入编辑器。
-- 带有 `path:`、`file:`、引号、括号、否定或正则表达式的复杂全库查询，仍按 Obsidian 原有规则处理。
-- 只处理字符等价关系，不做地区词汇转换、形似字匹配或完整的 NFKC 规范化。
-- 字符数据筛选自 Unicode 18.0.0 和 OpenCC 1.4.2，并不覆盖所有异体字或地区标准。
+- Unicode 18.0.0、OpenCC 1.4.2。东亚模式含 17,584 个映射字符；全量模式 22,110 个。
+- 不增强 PDF、Canvas、Bases、网页或嵌入编辑器。Find 仅覆盖顶层 Markdown。
+- 复杂全库查询、正则、属性条件和部分 Graph 子树查询会保持原生规则；未知结构或超限时整条查询回退原生。
+- 标签／双链仅增强顶层 Markdown 编辑器的 `#` 和 `[[` 原生补全。
+- 输入超过 256 个码位、展开超过 65,536 个 UTF-16 单元或 4,096 个分支节点时回退原生。
+- macOS / Obsidian 1.13.7 已实测；iOS 新入口等待复测，Android、Windows、Linux 未完成验收。
 
-详细记录见[验证报告](docs/research/user-settings.md)、[数据报告](data/report.json)和[项目进度](TODO.md)。
+详细记录见[验证报告](docs/research/user-settings.md)、[编辑器补全报告](docs/research/editor-suggestions.md)、[图谱报告](docs/research/graph-view.md)、[数据报告](data/report.json)和[项目进度](TODO.md)。
 
 ## 隐私与问题反馈
 
@@ -67,7 +73,7 @@ Windows 和 Linux 对应使用 `Ctrl`；如果你改过快捷键，以 Obsidian 
 
 遇到问题时，可以在命令面板运行 `CJK Search: Print diagnostics`，然后在开发者工具的 Console 中筛选 `[CJK-Probe]`。提交日志前仍请检查并移除私人信息。
 
-欢迎通过 [Issues](https://github.com/soizo/Obsidian-CJK-Search/issues) 反馈问题或建议，或提交 Pull Request。报告问题时请提供 Obsidian 版本、操作系统、出问题的功能，以及能复现问题的最小示例和预期结果。
+欢迎通过 [Issues](https://github.com/soizo/Obsidian-CJK-Search/issues) 反馈问题或建议。报告问题时请提供 Obsidian 版本、操作系统、出问题的功能，以及能复现问题的最小示例和预期结果。
 
 ## 从源码构建
 
@@ -77,6 +83,11 @@ Windows 和 Linux 对应使用 `Ctrl`；如果你改过快捷键，以 Obsidian 
 npm ci
 npm test
 npm run build
+npm run test:native
+npm run test:surfaces
+npm run test:settings
+npm run test:graph
+npm run test:completions
 ```
 
 构建产物在 `dist/`，将其中所有文件复制到上面的插件目录即可。仓库已包含生成好的字符数据，普通构建不需要重新生成。

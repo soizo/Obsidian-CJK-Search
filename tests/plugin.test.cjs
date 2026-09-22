@@ -7,7 +7,7 @@ const path = require('node:path');
 const sourcePath = path.resolve('src/main.js');
 const data = require('../data/character-data.json');
 
-function fixture({ table = data, ready = true, saved = {}, failSave = false, failLoad = false } = {}) {
+function fixture({ table = data, ready = true, saved = {}, failSave = false, failLoad = false, language = 'en' } = {}) {
   const logs = [], notices = [], commands = [], rows = [], callbacks = new Map();
   let readyCallback, persisted = saved;
   class Component {
@@ -23,7 +23,8 @@ function fixture({ table = data, ready = true, saved = {}, failSave = false, fai
     constructor(app) { super(); this.app = app; this.manifest = {version:'0.1.0'}; }
     async loadData() { if (failLoad) throw new Error('PRIVATE read path'); return persisted; }
     async saveData(value) { if (failSave) throw new Error('PRIVATE save path'); persisted = value; }
-    addCommand(command) { commands.push(command); }
+    addCommand(command) { const index=commands.findIndex(existing=>existing.id===command.id); if(index>=0) commands[index]=command; else commands.push(command); return command; }
+    removeCommand(id) { const index=commands.findIndex(command=>command.id===id); if(index>=0) commands.splice(index,1); }
     addSettingTab(tab) { this.settingTab = tab; }
   }
   class PluginSettingTab {
@@ -34,6 +35,10 @@ function fixture({ table = data, ready = true, saved = {}, failSave = false, fai
     setName(value){this.name=value;return this;}
     setDesc(value){this.desc=value;return this;}
     setHeading(){this.heading=true;return this;}
+    addDropdown(callback){
+      const dropdown={addOptions(options){this.options=options;return this;},setValue(value){this.value=value;return this;},onChange(fn){this.change=fn;return this;},setDisabled(){return this;}};
+      this.dropdown=dropdown;callback(dropdown);return this;
+    }
     addToggle(callback){
       const toggle={setValue(value){this.value=value;return this;},onChange(fn){this.change=fn;return this;},setDisabled(){return this;}};
       this.toggle=toggle;callback(toggle);return this;
@@ -53,7 +58,7 @@ function fixture({ table = data, ready = true, saved = {}, failSave = false, fai
     change() { for (const callback of callbacks.get('layout-change') ?? []) callback(); },
   };
   const app = {workspace};
-  const api = {Plugin, Component, PluginSettingTab, Setting, Platform:{}, apiVersion:'1.13.7',
+  const api = {Plugin, Component, PluginSettingTab, Setting, Platform:{}, apiVersion:'1.13.7', getLanguage:()=>language,
     Notice:class { constructor(text) { notices.push(text); } }};
   const nativeRequire = createRequire(sourcePath);
   const context = { module:{exports:{}}, require: name => name === 'obsidian' ? api : name === '../data/character-data.json' ? table : nativeRequire(name),
@@ -80,13 +85,23 @@ function fixture({ table = data, ready = true, saved = {}, failSave = false, fai
 }
 
 test('per-entry choices default on, preserve old booleans and never write on load', async () => {
-  for(const key of ['searchEnabled','findEnabled','quickSwitcherEnabled']) {
+  for(const key of ['searchEnabled','findEnabled','quickSwitcherEnabled','graphEnabled','tagsEnabled','internalLinksEnabled']) {
     for(const [value,expected] of [[undefined,true],[false,false],[true,true],['false',true]]) {
       const saved={fullCompatibility:false,keep:'original',...(value===undefined?{}:{[key]:value})};
       const f=fixture({saved});await f.plugin.onload();
       assert.equal(f.plugin.settings[key],expected);assert.equal(f.plugin.settings.fullCompatibility,false);
       assert.equal(f.persisted,saved);f.plugin.unload();
     }
+  }
+});
+test('advanced graph queries opt in without migrating old settings', async()=>{
+  for(const [value,expected] of [[undefined,false],[null,false],['true',false],[true,true],[false,false]]) {
+    const saved={keep:'unchanged',...(value===undefined?{}:{graphAdvancedQueries:value})};
+    const f=fixture({saved});await f.plugin.onload();
+    assert.equal(f.plugin.settings.graphAdvancedQueries,expected);assert.equal(f.persisted,saved);
+    await f.plugin.setSetting('graphEnabled',false);await f.plugin.setSetting('graphAdvancedQueries',true);
+    assert.equal(f.plugin.settings.graphEnabled,false);assert.equal(f.persisted.graphAdvancedQueries,true);
+    assert.equal(f.persisted.keep,'unchanged');f.plugin.unload();
   }
 });
 test('entry controls restore native search, stay independent, and do not leak listeners on repeated toggles', async () => {
@@ -99,7 +114,7 @@ test('entry controls restore native search, stay independent, and do not leak li
   await f.plugin.setSetting('searchEnabled',true);
   result=v.search();assert.notEqual(v.view.searchQuery.matcher,result.oldMatcher);
   const listeners=f.listenerCount('layout-change');
-  for(let i=0;i<3;i++)for(const key of ['findEnabled','quickSwitcherEnabled']) {
+  for(let i=0;i<3;i++)for(const key of ['findEnabled','quickSwitcherEnabled','graphEnabled','tagsEnabled','internalLinksEnabled']) {
     await f.plugin.setSetting(key,false);await f.plugin.setSetting(key,true);
   }
   assert.equal(f.listenerCount('layout-change'),listeners,'Toggling must not accumulate workspace listeners');
@@ -125,17 +140,59 @@ test('concurrent setting writes preserve each choice and failures leave active b
   await assert.rejects(()=>bad.plugin.setSetting('findEnabled',false));assert.equal(bad.plugin.settings.findEnabled,true);
   f.plugin.unload();bad.plugin.unload();
 });
-test('settings expose four usable English controls, rollback failed changes and load quietly', async () => {
+test('settings expose eight usable English controls, rollback failed changes and load quietly', async () => {
   const f=fixture({failSave:true});await f.plugin.onload();
   assert.equal(f.notices.length,0,'Successful loading must not display a developer notification');
   f.plugin.settingTab.display();const controls=f.rows.filter(row=>row.toggle);
-  assert.equal(controls.length,4);assert(controls.every(row=>typeof row.toggle.change==='function'));
+  assert.equal(controls.length,8);assert(controls.every(row=>typeof row.toggle.change==='function'));
   assert(!/[\u3400-\u9fff]/u.test(f.rows.map(row=>row.name+' '+row.desc).join(' ')+' '+f.commands.map(c=>c.name).join(' ')));
   controls[0].toggle.setValue(false);await controls[0].toggle.change(false);
   assert.equal(controls[0].toggle.value,true);assert.equal(f.plugin.settings.searchEnabled,true);
   f.plugin.unload();
 });
 
+test('language follows the host without writes; explicit overrides persist and update UI, command and notices', async () => {
+  const saved={keep:'original',findEnabled:false};
+  const f=fixture({saved,language:'zh'});await f.plugin.onload();
+  assert.equal(f.plugin.settings.language,'auto');assert.equal(f.persisted,saved);
+  f.plugin.settingTab.display();
+  assert(f.rows.some(row=>row.name==='搜索增强'));
+  const languageRow=f.rows.find(row=>row.dropdown);
+  assert.equal(Object.keys(languageRow.dropdown.options).length,10);
+  await languageRow.dropdown.change('ja');
+  assert.equal(f.persisted.language,'ja');assert.equal(f.persisted.keep,'original');
+  assert.equal(f.plugin.settings.findEnabled,false);
+  assert(f.rows.some(row=>row.name==='検索の拡張'));
+  assert.equal(f.commands.length,1);assert.equal(f.commands[0].id,'print-diagnostics');
+  assert.equal(f.commands[0].name,'診断情報を出力');
+  f.commands[0].callback();assert.match(f.notices.at(-1),/診断情報/);
+  await Promise.all([f.plugin.setSetting('language','ko-KP'),f.plugin.setSetting('searchEnabled',false)]);
+  assert.equal(f.persisted.language,'ko-KP');assert.equal(f.persisted.searchEnabled,false);
+  assert.equal(f.commands.length,1);
+  f.plugin.unload();await f.plugin.onload();f.plugin.settingTab.display();
+  assert(f.rows.some(row=>row.name==='검색 개선'));assert.equal(f.plugin.settings.language,'ko-KP');
+  for(const value of ['invalid','__proto__',true,null,{}]) await assert.rejects(()=>f.plugin.setSetting('language',value));
+  await f.plugin.setSetting('language','auto');f.plugin.settingTab.display();
+  assert(f.rows.some(row=>row.name==='搜索增强'));f.plugin.unload();
+});
+test('failed language writes keep the previous UI, command and persisted settings', async () => {
+  const saved={language:'ja',keep:1};const f=fixture({saved,failSave:true});await f.plugin.onload();
+  f.plugin.settingTab.display();const dropdown=f.rows.find(row=>row.dropdown)?.dropdown;
+  assert(dropdown,'Language dropdown must exist');
+  dropdown.setValue('vi');await dropdown.change('vi');
+  assert.equal(dropdown.value,'ja');assert.equal(f.plugin.settings.language,'ja');assert.equal(f.persisted,saved);
+  assert.equal(f.commands[0].name,'診断情報を出力');assert.match(f.notices.at(-1),/保存/);
+  f.plugin.unload();
+});
+test('invalid saved languages safely follow the host; load failures localise before settings are available', async () => {
+  for(const language of [false,{},'constructor','invalid',null]) {
+    const saved={language};const f=fixture({saved,language:'vi'});await f.plugin.onload();
+    assert.equal(f.plugin.settings.language,'auto');assert.equal(f.persisted,saved);
+    f.plugin.settingTab.display();assert(f.rows.some(row=>row.name==='Tăng cường tìm kiếm'));f.plugin.unload();
+  }
+  const f=fixture({failLoad:true,language:'zh'});await f.plugin.onload();
+  assert.match(f.notices[0],/无法加载设置/);f.plugin.unload();
+});
 test('routine lifecycle and searches stay quiet; explicit diagnostics still report counters', async () => {
   const f = fixture(), v = f.makeView();
   f.workspace.leaves = [{view:v.view}];

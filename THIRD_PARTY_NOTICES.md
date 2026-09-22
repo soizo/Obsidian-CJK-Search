@@ -14,6 +14,10 @@ Official project: https://github.com/BYVoid/OpenCC . Pinned commit: `025f371dc76
 
 STCharacters.txt, TSCharacters.txt, TWVariants.txt, HKVariants.txt and JPShinjitaiCharacters.txt are Open Chinese Convert (OpenCC) Dictionary files, licensed under [Apache License 2.0](LICENSES/OpenCC-LICENSE.txt). Original file headers are retained in `data/upstream/`. The pinned repository root has no NOTICE file, as recorded in the source lock.
 
+## Mainland standard Traditional Chinese locale
+
+The Mainland standard Traditional Chinese locale is generated with OpenCC 1.4.2 from the `TGPhrases.txt` and `TGCharacters.txt` dictionaries in [TerryTian-tech/OpenCC-Traditional-Chinese-characters-according-to-Chinese-government-standards](https://github.com/TerryTian-tech/OpenCC-Traditional-Chinese-characters-according-to-Chinese-government-standards), pinned at commit `d1fb3d5a2e21716fa15572ec9305d15b06dbce5b`. That project is licensed under Apache-2.0. Taiwan and Hong Kong locale variants are generated with OpenCC 1.4.2 `t2tw` and `t2hk` configurations. The locale files contain derived UI text only; no OpenCC runtime is bundled.
+
 ## Modifications
 
 CJK Search generates new search data from these sources: it filters relationship types, retains all eligible character candidates, makes selected relationships symmetric, groups them, recursively resolves selected decomposition sequences, and produces separate East Asian and full compatibility modes. It does not ship regional phrase conversion dictionaries. Generated tables and bundled copies are modified/derived data, not unmodified upstream dictionaries. `data/relations.jsonl` and `data/report.json` preserve source attribution and selection details.

@@ -1,0 +1,16 @@
+{
+  "enhancements":"Tăng cường tìm kiếm","introduction":"Tìm các ký tự tương đương mà không thay đổi văn bản của bạn.","matching":"Đối sánh ký tự","nextSearch":"Thay đổi sẽ áp dụng từ lần tìm kiếm tiếp theo.",
+  "settings":{
+    "searchEnabled":{"name":"Tìm kiếm","description":"Tìm kiếm trong toàn bộ vault.","unavailable":"Tìm kiếm đang bị tắt. Hãy bật Tìm kiếm trong các plugin lõi để dùng tính năng này."},
+    "findEnabled":{"name":"Tìm","description":"Tìm trong ghi chú Markdown hiện tại. Thao tác thay thế không thay đổi."},
+    "quickSwitcherEnabled":{"name":"Trình chuyển nhanh","description":"Đối sánh tên tệp, đường dẫn và bí danh.","unavailable":"Trình chuyển nhanh đang bị tắt. Hãy bật Trình chuyển nhanh trong các plugin lõi để dùng tính năng này."},
+    "graphEnabled":{"name":"Chế độ xem đồ thị","description":"Đối sánh các ký tự tương đương trong bộ lọc và nhóm của đồ thị toàn cục và cục bộ.","unavailable":"Hãy bật Chế độ xem đồ thị trong các plugin lõi để dùng tính năng này."},
+    "graphAdvancedQueries":{"name":"Truy vấn đồ thị nâng cao","description":"Cũng đối sánh ký tự tương đương trong các bộ lọc path:, file: và tag:. Điều kiện loại trừ cũng bao gồm các dạng tương đương. Cần bật tăng cường đồ thị."},
+    "tagsEnabled":{"name":"Thẻ","description":"Gợi ý các thẻ tương đương sau # trong trình soạn thảo Markdown. Chèn thẻ gốc."},
+    "internalLinksEnabled":{"name":"Liên kết nội bộ","description":"Gợi ý tên tệp, đường dẫn và bí danh tương đương sau [[. Tiêu đề, khối và văn bản hiển thị không thay đổi."},
+    "fullCompatibility":{"name":"Ký tự tương thích","description":"Cũng đối sánh các dạng như ① / 1, Ａ / A và ﬃ / ffi. Tắt tùy chọn này không thay đổi đối sánh tích hợp sẵn."}
+  },
+  "diagnostics":"In thông tin chẩn đoán","diagnosticsPrinted":"Đã ghi thông tin chẩn đoán vào bảng điều khiển. Lọc theo [CJK-Probe].",
+  "errors":{"settingsLoad":"Không thể tải cài đặt. Phiên này dùng giá trị mặc định; tệp cài đặt không bị thay đổi.","settingsSave":"Không thể lưu cài đặt này. Lựa chọn trước đó vẫn đang được dùng. Hãy kiểm tra quyền truy cập vault rồi thử lại.","dataInvalid":"Không thể tải dữ liệu ký tự. Tìm kiếm tích hợp không thay đổi. Hãy tải lại CJK Search rồi thử lại.","incompatible":"Giao diện tìm kiếm này không được hỗ trợ. Tìm kiếm tích hợp sẽ được dùng. Hãy in thông tin chẩn đoán để kiểm tra.","limit":"Truy vấn này vượt quá giới hạn tăng cường. Tìm kiếm tích hợp sẽ được dùng.","nativeInterface":"Không thể tăng cường tìm kiếm. Tìm kiếm tích hợp sẽ được dùng. Hãy in thông tin chẩn đoán để kiểm tra.","enhancementUpdate":"Không thể cập nhật tăng cường tìm kiếm. Hãy tải lại CJK Search rồi thử lại."},
+  "language":{"name":"Ngôn ngữ","description":"Chọn ngôn ngữ của plugin. Quy tắc đối sánh tìm kiếm không thay đổi.","auto":"Theo Obsidian","options":{"auto":"Theo Obsidian","zh-Hans":"Tiếng Trung giản thể","zh-Hant-CN":"Tiếng Trung phồn thể（Đại lục）","zh-Hant-TW":"Tiếng Trung phồn thể（Đài Loan）","zh-Hant-HK":"Tiếng Trung phồn thể（Hồng Kông）","en-GB":"Tiếng Anh（Vương quốc Anh）","ja":"Tiếng Nhật","ko-KR":"Tiếng Hàn","ko-KP":"Tiếng Triều Tiên","vi":"Tiếng Việt"}}
+}

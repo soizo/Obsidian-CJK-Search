@@ -1,0 +1,16 @@
+{
+  "enhancements":"검색 강화","introduction":"텍스트를 바꾸지 않고 같은 문자를 일치시킵니다.","matching":"문자 일치","nextSearch":"변경 사항은 다음 검색부터 적용됩니다.",
+  "settings":{
+    "searchEnabled":{"name":"검색","description":"보관함 전체를 검색합니다.","unavailable":"검색이 비활성화되어 있습니다. 이 기능을 사용하려면 코어 플러그인에서 검색을 활성화하세요."},
+    "findEnabled":{"name":"찾기","description":"현재 Markdown 노트 안에서 검색합니다. 바꾸기 동작은 변경되지 않습니다."},
+    "quickSwitcherEnabled":{"name":"빠른 전환","description":"파일 이름, 경로, 별칭을 일치시킵니다.","unavailable":"빠른 전환이 비활성화되어 있습니다. 이 기능을 사용하려면 코어 플러그인에서 빠른 전환을 활성화하세요."},
+    "graphEnabled":{"name":"그래프 뷰","description":"전역 및 로컬 그래프의 필터와 그룹에서 같은 문자를 일치시킵니다.","unavailable":"이 기능을 사용하려면 코어 플러그인에서 그래프 뷰를 활성화하세요."},
+    "graphAdvancedQueries":{"name":"고급 그래프 쿼리","description":"path:, file:, tag: 필터에서도 같은 문자를 일치시킵니다. 제외 조건에도 같은 형식을 포함합니다. 그래프 뷰 강화가 필요합니다."},
+    "tagsEnabled":{"name":"태그","description":"Markdown 편집기에서 # 뒤에 같은 태그를 제안합니다. 원래 태그를 삽입합니다."},
+    "internalLinksEnabled":{"name":"내부 링크","description":"[[ 뒤에 같은 파일 이름, 경로, 별칭을 제안합니다. 제목, 블록, 표시 텍스트는 변경되지 않습니다."},
+    "fullCompatibility":{"name":"호환 문자","description":"① / 1, Ａ / A, ﬃ / ffi 같은 형식도 일치시킵니다. 끄면 기본 제공 일치는 그대로 유지됩니다."}
+  },
+  "diagnostics":"진단 정보 출력","diagnosticsPrinted":"진단 정보를 콘솔에 기록했습니다. [CJK-Probe]로 필터링하세요.",
+  "errors":{"settingsLoad":"설정을 불러올 수 없습니다. 이 세션에서는 기본값을 사용하며 설정 파일은 변경하지 않았습니다.","settingsSave":"이 설정을 저장할 수 없습니다. 이전 선택이 계속 적용됩니다. 보관함 접근 권한을 확인하고 다시 시도하세요.","dataInvalid":"문자 데이터를 불러올 수 없습니다. 기본 검색은 변경되지 않습니다. CJK Search를 다시 불러온 후 다시 시도하세요.","incompatible":"이 검색 인터페이스는 지원되지 않습니다. 기본 검색을 사용합니다. 문제 해결을 위해 진단 정보를 출력하세요.","limit":"이 쿼리는 강화 한도를 초과합니다. 기본 검색을 사용합니다.","nativeInterface":"검색을 강화할 수 없습니다. 기본 검색을 사용합니다. 문제 해결을 위해 진단 정보를 출력하세요.","enhancementUpdate":"검색 강화를 업데이트할 수 없습니다. CJK Search를 다시 불러온 후 다시 시도하세요."},
+  "language":{"name":"언어","description":"플러그인 언어를 선택합니다. 검색 일치 규칙은 바뀌지 않습니다.","auto":"Obsidian 설정 따르기","options":{"auto":"Obsidian 설정 따르기","zh-Hans":"중국어 간체","zh-Hant-CN":"중국어 번체（중국 본토）","zh-Hant-TW":"중국어 번체（대만）","zh-Hant-HK":"중국어 번체（홍콩）","en-GB":"영어（영국）","ja":"일본어","ko-KR":"한국어","ko-KP":"조선어","vi":"베트남어"}}
+}

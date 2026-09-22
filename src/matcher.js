@@ -157,4 +157,22 @@ function mapRanges(spans, ranges) {
   return merged;
 }
 
-module.exports = { createExpander, mapRanges, LIMITS };
+// Native suggestion scoring over canonical text, with original display offsets.
+function createMappedSearch(query, expander, fullCompatibility, prepare) {
+  if (typeof query !== 'string') throw new TypeError('Invalid query');
+  if (query.length > LIMITS.input * 2 || [...query].length > LIMITS.input) throw new RangeError('input-limit');
+  function canonical(text) {
+    const mapped = expander.canonicalize(text, {fullCompatibility});
+    if (mapped.status === 'fallback') throw new RangeError(mapped.reason);
+    return mapped;
+  }
+  const match = prepare(canonical(query).text);
+  return (text, offset = 0) => {
+    const mapped = canonical(text), found = match(mapped.text);
+    if (!found) return null;
+    if (!Number.isFinite(found.score)) throw new Error('Invalid native score');
+    return {score:found.score, matches:mapRanges(mapped.spans,found.matches).map(([start,end])=>[start+offset,end+offset])};
+  };
+}
+
+module.exports = { createExpander, mapRanges, createMappedSearch, LIMITS, escapeRegex };
