@@ -10,14 +10,18 @@ const root = path.resolve(__dirname, '..');
   try { report = JSON.parse(await fs.readFile(path.join(root, 'data/report.json'), 'utf8')); }
   catch (cause) { throw new Error('Cannot read generated data report; run data:build first', {cause}); }
   if (createHash('sha256').update(bytes).digest('hex') !== report.sha256) throw new Error('Generated data/report mismatch');
-  const files = ['manifest.json', 'THIRD_PARTY_NOTICES.md', 'LICENSES/Unicode-LICENSE.txt', 'LICENSES/OpenCC-LICENSE.txt'];
+  const files = ['manifest.json', 'LICENSE', 'THIRD_PARTY_NOTICES.md', 'LICENSES/Unicode-LICENSE.txt', 'LICENSES/OpenCC-LICENSE.txt'];
   try { await fs.access(path.join(root,'LICENSES/OpenCC-NOTICE.txt')); files.push('LICENSES/OpenCC-NOTICE.txt'); }
   catch (error) { if (error.code !== 'ENOENT') throw error; }
   for (const name of files) await fs.access(path.join(root,name));
+  // Community installs only download main.js, manifest.json and optional CSS.
+  const notices = await Promise.all(files.filter(name => name !== 'manifest.json').map(async name =>
+    `${name}\n${await fs.readFile(path.join(root,name),'utf8')}`));
+  const banner = notices.join('\n\n').split('\n').map(line => `// ${line}`).join('\n');
   const result = await build({
     absWorkingDir: root, entryPoints: ['src/main.js'], outfile: 'dist/main.js', bundle: true,
     platform: 'browser', format: 'cjs', target: 'es2018', external: ['obsidian'],
-    sourcemap: false, minify: false, metafile: true, write: false,
+    sourcemap: false, minify: false, metafile: true, write: false, banner: {js:banner},
   });
   for (const output of Object.values(result.metafile.outputs))
     for (const dependency of output.imports)

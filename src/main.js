@@ -10,6 +10,7 @@ const DEFAULT_SETTINGS = {searchEnabled:true, findEnabled:true, quickSwitcherEna
 const build = 'user-settings-0.3.0';
 
 function log(event, details = {}, level = 'info') {
+  if (level === 'info' && event !== 'diagnostics') return;
   console[level](`[CJK-Probe] ${event} ${JSON.stringify({ time: new Date().toISOString(), ...details })}`);
 }
 log('module-evaluated', { build });

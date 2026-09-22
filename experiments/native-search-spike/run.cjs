@@ -174,8 +174,11 @@ const { chromium } = require('playwright');
           set(text) { probeWrites.push(text); value.set.call(this, text); },
         });
       });
-      assert(evidence.probeLogs.some(line => line.includes(' loaded ')), 'Probe must visibly log successful loading');
-      assert(evidence.probeLogs.some(line => line.includes(' attached ')), 'Probe must log native search hook attachment');
+      if (fullData) assert.deepEqual(evidence.probeLogs, [], 'Production loading must not emit debug logs');
+      else {
+        assert(evidence.probeLogs.some(line => line.includes(' loaded ')), 'Probe must visibly log successful loading');
+        assert(evidence.probeLogs.some(line => line.includes(' attached ')), 'Probe must log native search hook attachment');
+      }
       const cases = [
         ['体', ['a-simplified.md', 'b-variants.md'], [1, 2]],
         ['體', ['a-simplified.md', 'b-variants.md'], [1, 2]],
@@ -376,10 +379,17 @@ const { chromium } = require('playwright');
       await page.evaluate(() => {
         if (!app.commands.executeCommandById('cjk-search-probe:print-diagnostics')) throw new Error('Diagnostic command unavailable');
       });
-      for (const event of ['input', 'expanded', 'skipped', 'diagnostics']) {
-        assert(evidence.probeLogs.some(line => line.includes(` ${event} `)), `Missing diagnostic event: ${event}`);
+      if (fullData) {
+        const line = evidence.probeLogs.find(line => line.includes(' diagnostics '));
+        assert(line, 'Explicit diagnostics must still be available');
+        const diagnostic = JSON.parse(line.slice(line.indexOf('{')));
+        assert(diagnostic.views.some(view => view.counters.inputs > 0 && view.counters.expanded > 0 && view.counters.skipped > 0));
+      } else {
+        for (const event of ['input', 'expanded', 'skipped', 'diagnostics']) {
+          assert(evidence.probeLogs.some(line => line.includes(` ${event} `)), `Missing diagnostic event: ${event}`);
+        }
+        assert(evidence.probeLogs.some(line => line.includes('no-sample-mapping')));
       }
-      assert(evidence.probeLogs.some(line => line.includes(fullData ? 'no-mapping' : 'no-sample-mapping')));
       assert(evidence.probeLogs.some(line => line.includes('unsupported-syntax')));
       assert(!evidence.probeLogs.some(line => line.includes('PRIVATEQUERYSENTINEL')), 'Logs must not expose raw queries');
       await page.evaluate(async () => {
@@ -390,8 +400,13 @@ const { chromium } = require('playwright');
       const restored = await page.evaluate(() => ({ input: probeView.getQuery(), files: probeView.dom.getFiles().map(f => f.path) }));
       assert.deepEqual(restored, { input: '體', files: ['b-variants.md'] });
       evidence.restored = restored;
-      assert(evidence.probeLogs.some(line => line.includes(' unloaded ')), 'Probe must log cleanup');
-      assert(evidence.probeLogs.some(line => line.includes(' unloaded ') && /"restoredViews":[1-9]/.test(line)), 'Cleanup logs must report actual restored views');
+      if (fullData) {
+        assert(!evidence.probeLogs.some(line => / (module-evaluated|loaded|attached|input|expanded|skipped|unloaded|scan-views|settings-changed) /.test(line)),
+          'Production lifecycle and searches must not emit debug logs');
+      } else {
+        assert(evidence.probeLogs.some(line => line.includes(' unloaded ')), 'Probe must log cleanup');
+        assert(evidence.probeLogs.some(line => line.includes(' unloaded ') && /"restoredViews":[1-9]/.test(line)), 'Cleanup logs must report actual restored views');
+      }
       const logCount = evidence.probeLogs.length;
       await input.fill('真');
       await page.waitForFunction(() => probeView.dom.getMatchCount() === 1 && !probeView.dom.working);

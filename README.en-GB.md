@@ -17,6 +17,7 @@ Requires Obsidian 1.13.7 or later. The plugin relies on Obsidian's internal inte
    .obsidian/plugins/cjk-search-probe/
    ├── main.js
    ├── manifest.json
+   ├── LICENSE
    ├── THIRD_PARTY_NOTICES.md
    └── LICENSES/
        ├── Unicode-LICENSE.txt
@@ -62,7 +63,7 @@ See the [verification report](docs/research/user-settings.md), [data report](dat
 
 ## Privacy and reporting issues
 
-The plugin does not connect to the network at runtime, upload search content or logs, or rewrite notes. Diagnostic logs do not include search text, note contents or paths.
+The plugin does not connect to the network at runtime, upload search content or logs, or rewrite notes. Only warnings and errors are logged by default; diagnostics run on request and do not include search text, note contents or paths.
 
 For diagnostics, run `CJK Search: Print diagnostics` from the command palette, then filter for `[CJK-Probe]` in the developer-tool Console. Check for private information before sharing any logs.
 
@@ -84,4 +85,4 @@ The build is written to `dist/`. Copy all its contents into the plugin directory
 
 The code is released under the [MIT](LICENSE) licence. Copyright belongs to CJK Search contributors.
 
-Bundled data is subject to its upstream licences: Unicode uses Unicode License V3, and OpenCC uses Apache License 2.0. Retain the [third-party notices](THIRD_PARTY_NOTICES.md) and the licence files in [LICENSES/](LICENSES/) when distributing the plugin.
+Bundled data is subject to its upstream licences: Unicode uses Unicode License V3, and OpenCC uses Apache License 2.0. The built `main.js` embeds the full MIT, Unicode and OpenCC licence texts and third-party notices, so community installations retain them. Keep these comments when distributing the plugin; ZIP packages also include standalone copies of [LICENSE](LICENSE), the [third-party notices](THIRD_PARTY_NOTICES.md) and [LICENSES/](LICENSES/).

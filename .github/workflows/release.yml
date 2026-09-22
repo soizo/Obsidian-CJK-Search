@@ -42,10 +42,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           VERSION: ${{ steps.version.outputs.version }}
         run: |
-          gh release create "v${VERSION}" \
+          gh release create "${VERSION}" \
             "cjk-search-v${VERSION}.zip" \
             dist/main.js \
             dist/manifest.json \
+            dist/LICENSE \
             dist/THIRD_PARTY_NOTICES.md \
             dist/LICENSES/*.txt \
             --target "$GITHUB_SHA" \

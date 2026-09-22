@@ -17,6 +17,7 @@
    .obsidian/plugins/cjk-search-probe/
    ├── main.js
    ├── manifest.json
+   ├── LICENSE
    ├── THIRD_PARTY_NOTICES.md
    └── LICENSES/
        ├── Unicode-LICENSE.txt
@@ -62,7 +63,7 @@ Windows 和 Linux 对应使用 `Ctrl`；如果你改过快捷键，以 Obsidian 
 
 ## 隐私与问题反馈
 
-插件运行时不联网，不上传搜索内容或日志，也不会改写笔记。诊断日志不包含搜索原文、笔记内容或路径。
+插件运行时不联网，不上传搜索内容或日志，也不会改写笔记。默认仅记录警告和错误；诊断日志需手动触发，不包含搜索原文、笔记内容或路径。
 
 遇到问题时，可以在命令面板运行 `CJK Search: Print diagnostics`，然后在开发者工具的 Console 中筛选 `[CJK-Probe]`。提交日志前仍请检查并移除私人信息。
 
@@ -84,4 +85,4 @@ npm run build
 
 代码采用 [MIT](LICENSE) 许可，版权归 CJK Search contributors 所有。
 
-随插件分发的数据另受上游许可约束：Unicode 使用 Unicode License V3，OpenCC 使用 Apache License 2.0。分发插件时请保留[第三方声明](THIRD_PARTY_NOTICES.md)及 [LICENSES/](LICENSES/) 中的许可证文件。
+随插件分发的数据另受上游许可约束：Unicode 使用 Unicode License V3，OpenCC 使用 Apache License 2.0。构建后的 `main.js` 内嵌 MIT、Unicode、OpenCC 许可证全文与第三方声明，确保社区安装不会遗漏。分发插件时请保留这些注释；ZIP 包同时附带 [LICENSE](LICENSE)、[第三方声明](THIRD_PARTY_NOTICES.md)及 [LICENSES/](LICENSES/) 中的独立副本。
