@@ -1,0 +1,9 @@
+{
+  "id": "cjk-search-probe",
+  "name": "CJK Search",
+  "version": "0.3.0",
+  "minAppVersion": "1.13.7",
+  "description": "Match equivalent CJK and compatibility characters in Search, Find, and Quick switcher without changing your text.",
+  "author": "CJK Search",
+  "isDesktopOnly": false
+}

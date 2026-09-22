@@ -1,0 +1,6 @@
+{
+  "include": ["scripts", "tests/test_build_data.py"],
+  "extraPaths": ["."],
+  "pythonVersion": "3.12",
+  "typeCheckingMode": "basic"
+}

@@ -1,0 +1,2143 @@
+{
+  "fields": {
+    "HKVariants": {
+      "included": 77,
+      "input": 77
+    },
+    "JPShinjitaiCharacters": {
+      "excluded": 302,
+      "included": 180,
+      "input": 482
+    },
+    "STCharacters": {
+      "included": 4311,
+      "input": 4311
+    },
+    "TSCharacters": {
+      "included": 5145,
+      "input": 5145
+    },
+    "TWVariants": {
+      "included": 43,
+      "input": 43
+    },
+    "equivalent-radical": {
+      "excluded": 20,
+      "included": 328,
+      "input": 348
+    },
+    "kJapaneseNewVariant": {
+      "included": 364,
+      "input": 364
+    },
+    "kJapaneseOldVariant": {
+      "included": 364,
+      "input": 364
+    },
+    "kSemanticVariant": {
+      "excluded": 4362,
+      "input": 4362
+    },
+    "kSimplifiedVariant": {
+      "included": 7354,
+      "input": 7354
+    },
+    "kSpecializedSemanticVariant": {
+      "excluded": 608,
+      "input": 608
+    },
+    "kSpoofingVariant": {
+      "excluded": 366,
+      "input": 366
+    },
+    "kTraditionalVariant": {
+      "included": 7354,
+      "input": 7354
+    },
+    "kZVariant": {
+      "included": 180,
+      "input": 180
+    },
+    "unicode-decomposition": {
+      "included": 5982,
+      "input": 5982
+    }
+  },
+  "japaneseAdditions": [
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "䀋",
+      "target": "䀋"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "䀋",
+      "target": "鹽"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "亘",
+      "target": "亙"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "侠",
+      "target": "侠"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "侠",
+      "target": "俠"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "値",
+      "target": "値"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "値",
+      "target": "值"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "倶",
+      "target": "倶"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "倶",
+      "target": "俱"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "兎",
+      "target": "兎"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "兎",
+      "target": "兔"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "内",
+      "target": "内"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "内",
+      "target": "內"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "凜",
+      "target": "凛"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "刹",
+      "target": "刹"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "刹",
+      "target": "剎"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "匀",
+      "target": "匀"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "匀",
+      "target": "勻"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "却",
+      "target": "却"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "却",
+      "target": "卻"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "厠",
+      "target": "厠"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "厠",
+      "target": "廁"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "叙",
+      "target": "敘"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "呉",
+      "target": "呉"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "呉",
+      "target": "吳"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "呪",
+      "target": "呪"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "呪",
+      "target": "咒"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "唇",
+      "target": "唇"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "唇",
+      "target": "脣"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "唖",
+      "target": "啞"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "嘘",
+      "target": "嘘"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "嘘",
+      "target": "噓"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "噛",
+      "target": "嚙"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "塡",
+      "target": "塡"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "塡",
+      "target": "填"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "奨",
+      "target": "獎"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "姉",
+      "target": "姉"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "姉",
+      "target": "姊"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "姫",
+      "target": "姫"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "姫",
+      "target": "姬"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "尭",
+      "target": "堯"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "峰",
+      "target": "峰"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "峰",
+      "target": "峯"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "巌",
+      "target": "巖"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "庄",
+      "target": "庄"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "庄",
+      "target": "莊"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "床",
+      "target": "床"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "床",
+      "target": "牀"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "弯",
+      "target": "彎"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "彦",
+      "target": "彦"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "彦",
+      "target": "彥"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "御",
+      "target": "御"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "御",
+      "target": "禦"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "悦",
+      "target": "悦"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "悦",
+      "target": "悅"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "戸",
+      "target": "戸"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "戸",
+      "target": "戶"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "才",
+      "target": "才"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "才",
+      "target": "纔"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "挙",
+      "target": "舉"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "掴",
+      "target": "掴"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "掴",
+      "target": "摑"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "掻",
+      "target": "搔"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "撹",
+      "target": "攪"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "晃",
+      "target": "晄"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "晋",
+      "target": "晋"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "晋",
+      "target": "晉"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "曁",
+      "target": "曁"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "曁",
+      "target": "暨"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "査",
+      "target": "査"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "査",
+      "target": "查"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "桝",
+      "target": "枡"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "桧",
+      "target": "檜"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "楡",
+      "target": "楡"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "楡",
+      "target": "榆"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "槙",
+      "target": "槇"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "歳",
+      "target": "歲"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "氷",
+      "target": "氷"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "氷",
+      "target": "冰"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "汚",
+      "target": "汚"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "汚",
+      "target": "污"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "没",
+      "target": "没"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "没",
+      "target": "沒"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "沪",
+      "target": "濾"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "涛",
+      "target": "涛"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "涛",
+      "target": "濤"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "渋",
+      "target": "澀"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "湿",
+      "target": "溼"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "溌",
+      "target": "溌"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "溌",
+      "target": "潑"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "焔",
+      "target": "焔"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "焔",
+      "target": "焰"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "煙",
+      "target": "煙"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "煙",
+      "target": "菸"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "猫",
+      "target": "猫"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "猫",
+      "target": "貓"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "産",
+      "target": "産"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "産",
+      "target": "產"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "畵",
+      "target": "畵"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "畵",
+      "target": "畫"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "痺",
+      "target": "痺"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "痺",
+      "target": "痹"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "皐",
+      "target": "皐"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "皐",
+      "target": "皋"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "砺",
+      "target": "砺"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "砺",
+      "target": "礪"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "祢",
+      "target": "禰"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "祷",
+      "target": "禱"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "禄",
+      "target": "祿"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "税",
+      "target": "税"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "税",
+      "target": "稅"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "稜",
+      "target": "稜"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "稜",
+      "target": "棱"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "穣",
+      "target": "穰"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "竃",
+      "target": "竃"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "竃",
+      "target": "竈"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "粧",
+      "target": "粧"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "粧",
+      "target": "妝"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "粽",
+      "target": "粽"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "粽",
+      "target": "糉"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "絶",
+      "target": "絶"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "絶",
+      "target": "絕"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "繋",
+      "target": "繋"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "繋",
+      "target": "繫"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "繍",
+      "target": "繡"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "群",
+      "target": "群"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "群",
+      "target": "羣"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "聡",
+      "target": "聡"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "聡",
+      "target": "聰"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "脚",
+      "target": "腳"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "脱",
+      "target": "脫"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "舎",
+      "target": "舎"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "舎",
+      "target": "舍"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "舖",
+      "target": "舖"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "舖",
+      "target": "鋪"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "舗",
+      "target": "舗"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "舗",
+      "target": "鋪"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "芦",
+      "target": "蘆"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "茘",
+      "target": "茘"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "茘",
+      "target": "荔"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "莱",
+      "target": "莱"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "莱",
+      "target": "萊"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "萌",
+      "target": "萠"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "葱",
+      "target": "葱"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "葱",
+      "target": "蔥"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "蒋",
+      "target": "蔣"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "蝉",
+      "target": "蝉"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "蝉",
+      "target": "蟬"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "蝋",
+      "target": "蠟"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "説",
+      "target": "說"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "贋",
+      "target": "贋"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "贋",
+      "target": "贗"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "輌",
+      "target": "輌"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "輌",
+      "target": "輛"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "連",
+      "target": "連"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "連",
+      "target": "聯"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "遥",
+      "target": "遙"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "郷",
+      "target": "鄉"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "醗",
+      "target": "醗"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "醗",
+      "target": "醱"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "醤",
+      "target": "醬"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "鋭",
+      "target": "鋭"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "鋭",
+      "target": "銳"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "閲",
+      "target": "閱"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "闘",
+      "target": "鬥"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "隣",
+      "target": "隣"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "隣",
+      "target": "鄰"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "頴",
+      "target": "穎"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "顔",
+      "target": "顏"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "駈",
+      "target": "駈"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "駈",
+      "target": "驅"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "鬪",
+      "target": "鬪"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "鬪",
+      "target": "鬥"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "鴎",
+      "target": "鷗"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "鶏",
+      "target": "雞"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "鹸",
+      "target": "鹼"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "麹",
+      "target": "麴"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "麺",
+      "target": "麪"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "鼈",
+      "target": "鼈"
+    },
+    {
+      "field": "JPShinjitaiCharacters",
+      "file": "JPShinjitaiCharacters.txt",
+      "included": true,
+      "reason": "supplemental-japanese-edge",
+      "source": "鼈",
+      "target": "鱉"
+    }
+  ],
+  "modes": {
+    "eastAsian": {
+      "characters": 17584,
+      "groups": 8279,
+      "largestGroups": [
+        [
+          "⻱",
+          "⻲",
+          "⻳",
+          "⿔",
+          "亀",
+          "龜",
+          "龟",
+          "龜",
+          "龜",
+          "龜"
+        ],
+        [
+          "炼",
+          "煉",
+          "錬",
+          "鍊",
+          "鏈",
+          "链",
+          "煉",
+          "鍊",
+          "𫔀",
+          "𲇷"
+        ],
+        [
+          "⽃",
+          "⾾",
+          "斗",
+          "闘",
+          "鬥",
+          "鬪",
+          "鬭",
+          "𳈗"
+        ],
+        [
+          "⾥",
+          "哩",
+          "裏",
+          "裡",
+          "里",
+          "裏",
+          "裡",
+          "里"
+        ],
+        [
+          "並",
+          "併",
+          "倂",
+          "并",
+          "幷",
+          "竝",
+          "並",
+          "倂"
+        ],
+        [
+          "历",
+          "厤",
+          "暦",
+          "曆",
+          "歴",
+          "歷",
+          "曆",
+          "歷"
+        ],
+        [
+          "_",
+          "︳",
+          "︴",
+          "﹍",
+          "﹎",
+          "﹏",
+          "＿"
+        ],
+        [
+          "⻯",
+          "⻰",
+          "⿓",
+          "竜",
+          "龍",
+          "龙",
+          "龍"
+        ],
+        [
+          "⾯",
+          "面",
+          "麪",
+          "麫",
+          "麵",
+          "麺",
+          "𮮄"
+        ],
+        [
+          "㓰",
+          "划",
+          "劃",
+          "画",
+          "畫",
+          "畵",
+          "画"
+        ],
+        [
+          "⺓",
+          "⼳",
+          "么",
+          "幺",
+          "麼",
+          "麽"
+        ],
+        [
+          "⺾",
+          "⺿",
+          "⻀",
+          "艹",
+          "艹",
+          "艹"
+        ],
+        [
+          "⻧",
+          "⿄",
+          "卤",
+          "滷",
+          "鹵",
+          "𰛮"
+        ],
+        [
+          "⻫",
+          "⻬",
+          "⿑",
+          "斉",
+          "齊",
+          "齐"
+        ],
+        [
+          "⻭",
+          "⻮",
+          "⿒",
+          "歯",
+          "齒",
+          "齿"
+        ],
+        [
+          "⾪",
+          "隶",
+          "隷",
+          "隸",
+          "隸",
+          "隷"
+        ],
+        [
+          "㊘",
+          "劳",
+          "労",
+          "勞",
+          "勞",
+          "劳"
+        ],
+        [
+          "举",
+          "挙",
+          "擧",
+          "舉",
+          "𢪓",
+          "𢸁"
+        ],
+        [
+          "乐",
+          "楽",
+          "樂",
+          "樂",
+          "樂",
+          "樂"
+        ],
+        [
+          "台",
+          "枱",
+          "檯",
+          "臺",
+          "颱",
+          "𱃗"
+        ]
+      ],
+      "sequenceKeys": 243
+    },
+    "full": {
+      "characters": 22110,
+      "groups": 10480,
+      "largestGroups": [
+        [
+          "C",
+          "ℂ",
+          "ℭ",
+          "Ⅽ",
+          "Ⓒ",
+          "ꟲ",
+          "Ｃ",
+          "𜳘",
+          "𝐂",
+          "𝐶",
+          "𝑪",
+          "𝒞",
+          "𝓒",
+          "𝕮",
+          "𝖢",
+          "𝗖",
+          "𝘊",
+          "𝘾",
+          "𝙲",
+          "🄫",
+          "🄲"
+        ],
+        [
+          "D",
+          "ᴰ",
+          "ⅅ",
+          "Ⅾ",
+          "Ⓓ",
+          "Ｄ",
+          "𜳙",
+          "𝐃",
+          "𝐷",
+          "𝑫",
+          "𝒟",
+          "𝓓",
+          "𝔇",
+          "𝔻",
+          "𝕯",
+          "𝖣",
+          "𝗗",
+          "𝘋",
+          "𝘿",
+          "𝙳",
+          "🄳"
+        ],
+        [
+          "i",
+          "ᵢ",
+          "ⁱ",
+          "ℹ",
+          "ⅈ",
+          "ⅰ",
+          "ⓘ",
+          "ｉ",
+          "𝐢",
+          "𝑖",
+          "𝒊",
+          "𝒾",
+          "𝓲",
+          "𝔦",
+          "𝕚",
+          "𝖎",
+          "𝗂",
+          "𝗶",
+          "𝘪",
+          "𝙞",
+          "𝚒"
+        ],
+        [
+          "I",
+          "ᴵ",
+          "ℐ",
+          "ℑ",
+          "Ⅰ",
+          "Ⓘ",
+          "Ｉ",
+          "𜳞",
+          "𝐈",
+          "𝐼",
+          "𝑰",
+          "𝓘",
+          "𝕀",
+          "𝕴",
+          "𝖨",
+          "𝗜",
+          "𝘐",
+          "𝙄",
+          "𝙸",
+          "🄸"
+        ],
+        [
+          "K",
+          "ᴷ",
+          "K",
+          "Ⓚ",
+          "Ｋ",
+          "𜳠",
+          "𝐊",
+          "𝐾",
+          "𝑲",
+          "𝒦",
+          "𝓚",
+          "𝔎",
+          "𝕂",
+          "𝕶",
+          "𝖪",
+          "𝗞",
+          "𝘒",
+          "𝙆",
+          "𝙺",
+          "🄺"
+        ],
+        [
+          "L",
+          "ᴸ",
+          "ℒ",
+          "Ⅼ",
+          "Ⓛ",
+          "Ｌ",
+          "𜳡",
+          "𝐋",
+          "𝐿",
+          "𝑳",
+          "𝓛",
+          "𝔏",
+          "𝕃",
+          "𝕷",
+          "𝖫",
+          "𝗟",
+          "𝘓",
+          "𝙇",
+          "𝙻",
+          "🄻"
+        ],
+        [
+          "M",
+          "ᴹ",
+          "ℳ",
+          "Ⅿ",
+          "Ⓜ",
+          "Ｍ",
+          "𜳢",
+          "𝐌",
+          "𝑀",
+          "𝑴",
+          "𝓜",
+          "𝔐",
+          "𝕄",
+          "𝕸",
+          "𝖬",
+          "𝗠",
+          "𝘔",
+          "𝙈",
+          "𝙼",
+          "🄼"
+        ],
+        [
+          "R",
+          "ᴿ",
+          "ℛ",
+          "ℜ",
+          "ℝ",
+          "Ⓡ",
+          "Ｒ",
+          "𜳧",
+          "𝐑",
+          "𝑅",
+          "𝑹",
+          "𝓡",
+          "𝕽",
+          "𝖱",
+          "𝗥",
+          "𝘙",
+          "𝙍",
+          "𝚁",
+          "🄬",
+          "🅁"
+        ],
+        [
+          "V",
+          "Ⅴ",
+          "Ⓥ",
+          "ⱽ",
+          "Ｖ",
+          "𜳫",
+          "𝐕",
+          "𝑉",
+          "𝑽",
+          "𝒱",
+          "𝓥",
+          "𝔙",
+          "𝕍",
+          "𝖁",
+          "𝖵",
+          "𝗩",
+          "𝘝",
+          "𝙑",
+          "𝚅",
+          "🅅"
+        ],
+        [
+          "l",
+          "ˡ",
+          "ₗ",
+          "ℓ",
+          "ⅼ",
+          "ⓛ",
+          "ｌ",
+          "𝐥",
+          "𝑙",
+          "𝒍",
+          "𝓁",
+          "𝓵",
+          "𝔩",
+          "𝕝",
+          "𝖑",
+          "𝗅",
+          "𝗹",
+          "𝘭",
+          "𝙡",
+          "𝚕"
+        ],
+        [
+          "A",
+          "ᴬ",
+          "Ⓐ",
+          "Ａ",
+          "𜳖",
+          "𝐀",
+          "𝐴",
+          "𝑨",
+          "𝒜",
+          "𝓐",
+          "𝔄",
+          "𝔸",
+          "𝕬",
+          "𝖠",
+          "𝗔",
+          "𝘈",
+          "𝘼",
+          "𝙰",
+          "🄰"
+        ],
+        [
+          "B",
+          "ᴮ",
+          "ℬ",
+          "Ⓑ",
+          "Ｂ",
+          "𜳗",
+          "𝐁",
+          "𝐵",
+          "𝑩",
+          "𝓑",
+          "𝔅",
+          "𝔹",
+          "𝕭",
+          "𝖡",
+          "𝗕",
+          "𝘉",
+          "𝘽",
+          "𝙱",
+          "🄱"
+        ],
+        [
+          "E",
+          "ᴱ",
+          "ℰ",
+          "Ⓔ",
+          "Ｅ",
+          "𜳚",
+          "𝐄",
+          "𝐸",
+          "𝑬",
+          "𝓔",
+          "𝔈",
+          "𝔼",
+          "𝕰",
+          "𝖤",
+          "𝗘",
+          "𝘌",
+          "𝙀",
+          "𝙴",
+          "🄴"
+        ],
+        [
+          "F",
+          "ℱ",
+          "Ⓕ",
+          "ꟳ",
+          "Ｆ",
+          "𜳛",
+          "𝐅",
+          "𝐹",
+          "𝑭",
+          "𝓕",
+          "𝔉",
+          "𝔽",
+          "𝕱",
+          "𝖥",
+          "𝗙",
+          "𝘍",
+          "𝙁",
+          "𝙵",
+          "🄵"
+        ],
+        [
+          "G",
+          "ᴳ",
+          "Ⓖ",
+          "Ｇ",
+          "𜳜",
+          "𝐆",
+          "𝐺",
+          "𝑮",
+          "𝒢",
+          "𝓖",
+          "𝔊",
+          "𝔾",
+          "𝕲",
+          "𝖦",
+          "𝗚",
+          "𝘎",
+          "𝙂",
+          "𝙶",
+          "🄶"
+        ],
+        [
+          "H",
+          "ᴴ",
+          "ℋ",
+          "ℌ",
+          "ℍ",
+          "Ⓗ",
+          "Ｈ",
+          "𜳝",
+          "𝐇",
+          "𝐻",
+          "𝑯",
+          "𝓗",
+          "𝕳",
+          "𝖧",
+          "𝗛",
+          "𝘏",
+          "𝙃",
+          "𝙷",
+          "🄷"
+        ],
+        [
+          "J",
+          "ᴶ",
+          "Ⓙ",
+          "Ｊ",
+          "𜳟",
+          "𝐉",
+          "𝐽",
+          "𝑱",
+          "𝒥",
+          "𝓙",
+          "𝔍",
+          "𝕁",
+          "𝕵",
+          "𝖩",
+          "𝗝",
+          "𝘑",
+          "𝙅",
+          "𝙹",
+          "🄹"
+        ],
+        [
+          "N",
+          "ᴺ",
+          "ℕ",
+          "Ⓝ",
+          "Ｎ",
+          "𜳣",
+          "𝐍",
+          "𝑁",
+          "𝑵",
+          "𝒩",
+          "𝓝",
+          "𝔑",
+          "𝕹",
+          "𝖭",
+          "𝗡",
+          "𝘕",
+          "𝙉",
+          "𝙽",
+          "🄽"
+        ],
+        [
+          "O",
+          "ᴼ",
+          "Ⓞ",
+          "Ｏ",
+          "𜳤",
+          "𝐎",
+          "𝑂",
+          "𝑶",
+          "𝒪",
+          "𝓞",
+          "𝔒",
+          "𝕆",
+          "𝕺",
+          "𝖮",
+          "𝗢",
+          "𝘖",
+          "𝙊",
+          "𝙾",
+          "🄾"
+        ],
+        [
+          "P",
+          "ᴾ",
+          "ℙ",
+          "Ⓟ",
+          "Ｐ",
+          "𜳥",
+          "𝐏",
+          "𝑃",
+          "𝑷",
+          "𝒫",
+          "𝓟",
+          "𝔓",
+          "𝕻",
+          "𝖯",
+          "𝗣",
+          "𝘗",
+          "𝙋",
+          "𝙿",
+          "🄿"
+        ]
+      ],
+      "sequenceKeys": 1997
+    }
+  },
+  "openccVersion": "1.4.2",
+  "outputBytes": 2164390,
+  "schema": 1,
+  "sha256": "617738b285d30c78044f538f08ea6e2c5fbb6c8cd897306f64213df902f40eca",
+  "sourceFiles": 12,
+  "unicodeVersion": "18.0.0"
+}

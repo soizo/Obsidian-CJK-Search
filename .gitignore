@@ -1,0 +1,23 @@
+# Dependencies and generated plugin bundles
+/node_modules/
+/dist/
+
+# Local agent state, backups, and caches
+/.pi/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+
+# Obsidian configuration and disposable/manual vaults
+.obsidian/
+/experiments/native-search-spike/manual-test-vault/
+
+# Local application runs: screenshots, logs, and installation receipts
+/docs/research/evidence/*/
+
+# Local secrets (keep example configuration trackable)
+.env
+.env.*
+!.env.example

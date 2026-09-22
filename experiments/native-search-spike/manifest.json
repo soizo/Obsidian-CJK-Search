@@ -1,0 +1,9 @@
+{
+  "id": "cjk-search-probe",
+  "name": "CJK Search Feasibility Probe",
+  "version": "0.0.2",
+  "minAppVersion": "1.13.7",
+  "description": "Throwaway native search probe. Only four sample character groups; not for production use.",
+  "author": "CJK Search experiment",
+  "isDesktopOnly": false
+}

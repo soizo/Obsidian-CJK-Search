@@ -1,0 +1,87 @@
+{
+  "files": [
+    {
+      "bytes": 8340649,
+      "name": "Unihan.zip",
+      "sha256": "4c93ea9c1f636451729a840978f1667a53886af37ba854fdcce109721c63d43e",
+      "url": "https://www.unicode.org/Public/18.0.0/ucd/Unihan.zip"
+    },
+    {
+      "bytes": 2243593,
+      "name": "UnicodeData.txt",
+      "sha256": "0736451de439ae7baf1425136617da495e09ee5afbe6e394374db7009ea08950",
+      "url": "https://www.unicode.org/Public/18.0.0/ucd/UnicodeData.txt"
+    },
+    {
+      "bytes": 18371,
+      "name": "EquivalentUnifiedIdeograph.txt",
+      "sha256": "c86c80f6a0d1d47c9a5aadfbf1c26f1a732d662d9ccb0ed2d397919ecc47bf72",
+      "url": "https://www.unicode.org/Public/18.0.0/ucd/EquivalentUnifiedIdeograph.txt"
+    },
+    {
+      "bytes": 196089,
+      "name": "Scripts.txt",
+      "sha256": "0071fd81b6aeae25f6e8bce8efec3066a6476a91b49bdb2f52dc76e817862a6a",
+      "url": "https://www.unicode.org/Public/18.0.0/ucd/Scripts.txt"
+    },
+    {
+      "bytes": 11906,
+      "name": "Blocks.txt",
+      "sha256": "a58f8d322f3c5e254f9f97b1cbf76a454a7e02de6ac35619a5e4f27aaabfd553",
+      "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
+    },
+    {
+      "bytes": 1995,
+      "name": "Unicode-LICENSE.txt",
+      "sha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96",
+      "url": "https://www.unicode.org/license.txt"
+    },
+    {
+      "bytes": 36026,
+      "github": "data/dictionary/STCharacters.txt",
+      "name": "STCharacters.txt",
+      "sha256": "a0ca1601c70648cf48b33c3c6210ccbecc5c7eead4b4c3daf76587ba2c03582b",
+      "url": "https://raw.githubusercontent.com/BYVoid/OpenCC/025f371dc76b598d77384fbdab90c937471844d8/data/dictionary/STCharacters.txt"
+    },
+    {
+      "bytes": 104516,
+      "github": "data/dictionary/TSCharacters.txt",
+      "name": "TSCharacters.txt",
+      "sha256": "737c21c66f55a419dd6956cb3089476cdefc5a36877452631617696df1e5d925",
+      "url": "https://raw.githubusercontent.com/BYVoid/OpenCC/025f371dc76b598d77384fbdab90c937471844d8/data/dictionary/TSCharacters.txt"
+    },
+    {
+      "bytes": 986,
+      "github": "data/dictionary/TWVariants.txt",
+      "name": "TWVariants.txt",
+      "sha256": "e187278e119c427ca561180ac5da5b20e9f8681190458f35c327ce499e95a6a5",
+      "url": "https://raw.githubusercontent.com/BYVoid/OpenCC/025f371dc76b598d77384fbdab90c937471844d8/data/dictionary/TWVariants.txt"
+    },
+    {
+      "bytes": 1001,
+      "github": "data/dictionary/HKVariants.txt",
+      "name": "HKVariants.txt",
+      "sha256": "e5cd4345303224587102f2c9e4d2b67d2b7e349c6ce9152e4a118f4656cf7302",
+      "url": "https://raw.githubusercontent.com/BYVoid/OpenCC/025f371dc76b598d77384fbdab90c937471844d8/data/dictionary/HKVariants.txt"
+    },
+    {
+      "bytes": 12442,
+      "github": "data/dictionary/JPShinjitaiCharacters.txt",
+      "name": "JPShinjitaiCharacters.txt",
+      "sha256": "12cec7250b873ef52b36d8f92218d4f92c0aaf5d8cd7c58fe42d9785bdcdc43a",
+      "url": "https://raw.githubusercontent.com/BYVoid/OpenCC/025f371dc76b598d77384fbdab90c937471844d8/data/dictionary/JPShinjitaiCharacters.txt"
+    },
+    {
+      "bytes": 9165,
+      "github": "LICENSE",
+      "name": "OpenCC-LICENSE.txt",
+      "sha256": "b534e465949558eec2597b04f5092b5e161236a68dfbfd04d547592ac3964308",
+      "url": "https://raw.githubusercontent.com/BYVoid/OpenCC/025f371dc76b598d77384fbdab90c937471844d8/LICENSE"
+    }
+  ],
+  "openccCommit": "025f371dc76b598d77384fbdab90c937471844d8",
+  "openccNoticePresent": false,
+  "openccVersion": "1.4.2",
+  "schema": 1,
+  "unicodeVersion": "18.0.0"
+}
