@@ -24,8 +24,8 @@ async function verifySettings(page, context, evidence) {
     await page.evaluate(()=>app.setting.close());
   }
   let settings=await openSettings();
-  assert.equal(await settings.locator('.checkbox-container:visible').count(),4);
-  assert.equal(await settings.locator('.setting-item-name').getByText('Graph view',{exact:true}).count(),0);
+  assert.equal(await settings.locator('.checkbox-container:visible').count(),8);
+  assert.equal(await settings.locator('.setting-item-name').getByText('Graph view',{exact:true}).count(),1);
   await settings.setViewportSize({width:1000,height:800});
   await settings.screenshot({path:path.join(evidence.root,'settings-desktop.png')});
   await settings.evaluate(()=>{document.body.classList.remove('theme-light');document.body.classList.add('theme-dark');});
@@ -87,7 +87,7 @@ async function verifySettings(page, context, evidence) {
   await compatibility.press('Space');
   await page.waitForFunction(()=>app.plugins.plugins['cjk-search-probe'].settings.fullCompatibility===true);
   await page.evaluate(()=>app.setting.close());
-  evidence.settingsUI={controls:4,findModes:['source','preview'],independentToggles:true,
+  evidence.settingsUI={controls:8,findModes:['source','preview'],independentToggles:true,
     persistedOff:true,coreDisabledHint:true,keyboardToggle:true,nativeSearchMatches:native,enhancedSearchMatches:enhanced,
     visualCoverage:'Desktop native settings, light/dark CSS themes and 600px window; not iOS WebKit'};
 }

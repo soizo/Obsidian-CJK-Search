@@ -1,5 +1,5 @@
 'use strict';
-const {mapRanges, LIMITS} = require('./matcher.js');
+const {createMappedSearch, LIMITS} = require('./matcher.js');
 const {watchDocuments} = require('./documents.js');
 // Matches the native 1.13.7 image category, including its separation from the
 // all-file-types option. Registry eligibility still owns other attachments.
@@ -17,11 +17,6 @@ function augmentSuggestions(modal, rawQuery, nativeResults, expander, fullCompat
   if (flags.some(key => !(key in modal) || (modal[key] !== undefined && typeof modal[key] !== 'boolean')))
     throw new Error('Unsupported switcher options');
   const {vault,metadataCache,viewRegistry} = modal.app;
-  function canonical(text) {
-    const mapped = expander.canonicalize(text, {fullCompatibility});
-    if (mapped.status === 'fallback') throw new RangeError(mapped.reason);
-    return mapped;
-  }
   function eligible(file) {
     if (file.extension === 'md') return modal.shouldShowMarkdown;
     if (file.extension === 'canvas' || file.extension === 'base') return modal.shouldShowNonAttachments;
@@ -30,19 +25,12 @@ function augmentSuggestions(modal, rawQuery, nativeResults, expander, fullCompat
   }
   const files = vault.getFiles().filter(eligible);
   const prepare = files.length < 10000 ? api.prepareFuzzySearch : api.prepareSimpleSearch;
-  const match = prepare(canonical(query).text);
+  const mappedMatch = createMappedSearch(query,expander,fullCompatibility,prepare);
   const results = nativeResults.slice(), seen = new Map();
   for (const row of nativeResults) {
     if (row?.type !== 'file' && row?.type !== 'alias') continue;
     if (!seen.has(row.file)) seen.set(row.file,new Set());
     seen.get(row.file).add(row.type === 'file' ? fileKey : row.alias);
-  }
-  function mappedMatch(text, offset = 0) {
-    const mapped = canonical(text);
-    const found = match(mapped.text);
-    if (!found) return null;
-    if (!Number.isFinite(found.score)) throw new Error('Invalid native score');
-    return {score:found.score, matches:mapRanges(mapped.spans,found.matches).map(([start,end])=>[start+offset,end+offset])};
   }
   for (const file of files) {
     const keys = seen.get(file) ?? new Set();

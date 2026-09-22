@@ -1,0 +1,16 @@
+{
+  "enhancements":"検索の拡張","introduction":"テキストを変更せず、同等の文字を照合します。","matching":"文字の照合","nextSearch":"変更は次回の検索から適用されます。",
+  "settings":{
+    "searchEnabled":{"name":"検索","description":"Vault 全体を検索します。","unavailable":"検索が無効です。この機能を使うにはコアプラグインで検索を有効にしてください。"},
+    "findEnabled":{"name":"検索（現在のノート）","description":"現在の Markdown ノート内を検索します。置換は変更されません。"},
+    "quickSwitcherEnabled":{"name":"クイックスイッチャー","description":"ファイル名、パス、エイリアスを照合します。","unavailable":"クイックスイッチャーが無効です。この機能を使うにはコアプラグインで有効にしてください。"},
+    "graphEnabled":{"name":"グラフビュー","description":"グローバル／ローカルグラフのフィルターとグループで同等の文字を照合します。","unavailable":"この機能を使うにはコアプラグインでグラフビューを有効にしてください。"},
+    "graphAdvancedQueries":{"name":"グラフの詳細クエリ","description":"path:、file:、tag: フィルターでも同等の文字を照合します。除外条件にも同等の形式を含めます。グラフビュー拡張が必要です。"},
+    "tagsEnabled":{"name":"タグ","description":"Markdown エディターで # の後に同等のタグを提案します。元のタグを挿入します。"},
+    "internalLinksEnabled":{"name":"内部リンク","description":"[[ の後に同等のファイル名、パス、エイリアスを提案します。見出し、ブロック、表示テキストは変更されません。"},
+    "fullCompatibility":{"name":"互換文字","description":"① / 1、Ａ / A、ﬃ / ffi などの形式も照合します。無効にしても組み込みの照合は変わりません。"}
+  },
+  "diagnostics":"診断情報を出力","diagnosticsPrinted":"診断情報をコンソールに出力しました。[CJK-Probe] で絞り込めます。",
+  "errors":{"settingsLoad":"設定を読み込めませんでした。このセッションでは既定値を使用します。設定ファイルは変更していません。","settingsSave":"設定を保存できませんでした。以前の選択は有効なままです。Vault のアクセス権を確認して再試行してください。","dataInvalid":"文字データを読み込めませんでした。組み込み検索は変更されません。CJK Search を再読み込みして再試行してください。","incompatible":"この検索インターフェースはサポートされていません。組み込み検索を使用します。診断情報を出力して確認してください。","limit":"このクエリは拡張の上限を超えています。組み込み検索を使用します。","nativeInterface":"検索を拡張できませんでした。組み込み検索を使用します。診断情報を出力して確認してください。","enhancementUpdate":"検索の拡張を更新できませんでした。CJK Search を再読み込みして再試行してください。"},
+  "language":{"name":"言語","description":"プラグインの言語を選択します。検索の照合方法は変わりません。","auto":"Obsidian に従う","options":{"auto":"Obsidian に従う","zh-Hans":"簡体字中国語","zh-Hant-CN":"繁体字中国語（中国大陸）","zh-Hant-TW":"繁体字中国語（台湾）","zh-Hant-HK":"繁体字中国語（香港）","en-GB":"英語（英国）","ja":"日本語","ko-KR":"韓国語","ko-KP":"朝鮮語","vi":"ベトナム語"}}
+}

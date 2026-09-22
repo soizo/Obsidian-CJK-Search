@@ -1,6 +1,6 @@
 {
   "name": "cjk-search",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "private": true,
   "description": "Unicode and OpenCC character equivalence for native Obsidian search",
   "scripts": {
@@ -9,6 +9,8 @@
     "build": "node scripts/build.cjs",
     "test:native": "node experiments/native-search-spike/run.cjs --plugin-dir dist --full-data",
     "test:surfaces": "node experiments/native-search-spike/run.cjs --plugin-dir dist --surfaces",
+    "test:completions": "node experiments/native-search-spike/run.cjs --plugin-dir dist --completions",
+    "test:graph": "node experiments/native-search-spike/run.cjs --plugin-dir dist --graph",
     "test:settings": "node experiments/native-search-spike/run.cjs --plugin-dir dist --settings",
     "install:test": "node scripts/install-test.cjs"
   },
