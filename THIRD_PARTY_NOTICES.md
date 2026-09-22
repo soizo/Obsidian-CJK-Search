@@ -1,6 +1,6 @@
 # Third-party data notices
 
-This test plugin embeds derived data, not the OpenCC conversion runtime.
+This plugin embeds derived data, not the OpenCC conversion runtime.
 
 ## Unicode 18.0.0
 
@@ -22,4 +22,4 @@ The Mainland standard Traditional Chinese locale is generated with OpenCC 1.4.2 
 
 CJK Search generates new search data from these sources: it filters relationship types, retains all eligible character candidates, makes selected relationships symmetric, groups them, recursively resolves selected decomposition sequences, and produces separate East Asian and full compatibility modes. It does not ship regional phrase conversion dictionaries. Generated tables and bundled copies are modified/derived data, not unmodified upstream dictionaries. `data/relations.jsonl` and `data/report.json` preserve source attribution and selection details.
 
-These notices and both license files must accompany the plugin's generated data and bundled `main.js`.
+These notices and both license texts must accompany the plugin's generated data and bundled `main.js`. The build embeds them, together with the plugin's MIT license, in comments at the top of `main.js` so community installations retain them without additional downloads. ZIP distributions also include standalone copies.

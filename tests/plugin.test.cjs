@@ -193,6 +193,26 @@ test('invalid saved languages safely follow the host; load failures localise bef
   const f=fixture({failLoad:true,language:'zh'});await f.plugin.onload();
   assert.match(f.notices[0],/无法加载设置/);f.plugin.unload();
 });
+test('routine lifecycle and searches stay quiet; explicit diagnostics still report counters', async () => {
+  const f = fixture(), v = f.makeView();
+  f.workspace.leaves = [{view:v.view}];
+  await f.plugin.onload();
+  f.workspace.change();
+  v.input.dispatchEvent(new Event('input'));
+  v.search('体');
+  v.search('path:a 体');
+  await f.plugin.setFullCompatibility(false);
+  assert.deepEqual(f.logs, [], 'Normal operation must not write debug logs');
+  f.commands.find(command => command.id === 'print-diagnostics').callback();
+  assert.equal(f.logs.length, 1);
+  const diagnostic = JSON.parse(f.logs[0].slice(f.logs[0].indexOf('{')));
+  assert.equal(diagnostic.views[0].counters.inputs, 1);
+  assert.equal(diagnostic.views[0].counters.expanded, 1);
+  assert.equal(diagnostic.views[0].counters.skipped, 1);
+  assert.equal(diagnostic.fullCompatibility, false);
+  f.plugin.unload();
+  assert.equal(f.logs.length, 1, 'Unloading must not write debug logs');
+});
 
 test('hook preserves input, query, this, args and return; attaches once and unloads safely', async () => {
   const f = fixture(); const v = f.makeView(); f.workspace.leaves = [{view:v.view}];
@@ -207,13 +227,15 @@ test('hook preserves input, query, this, args and return; attaches once and unlo
   assert.notEqual(v.view.searchQuery.matcher,searched.oldMatcher);
   assert.equal(v.view.searchQuery.query,'体'); assert.equal(v.input.value,'体');
   v.input.dispatchEvent(new Event('input'));
-  assert(f.logs.some(line=>line.includes(' input ')));
+  const record = f.plugin.patched.get(v.view);
+  assert.equal(record.counts.inputs, 1);
   f.plugin.unload(); assert.equal(v.view.renderSearchInfo,original);
-  assert(f.logs.some(line=>line.includes(' unloaded ') && line.includes('"restoredViews":1')), 'Unload diagnostics must count restoration done by child cleanup');
+  assert.equal(record.restored, true);
   const count = f.logs.length;
   v.input.dispatchEvent(new Event('input'));
   f.workspace.fireLayoutReady(); assert.equal(v.view.renderSearchInfo,original);
   assert.equal(f.logs.length,count);
+  assert.equal(record.counts.inputs, 1, 'Unload must remove the input listener');
 });
 test('late and removed panels and foreign hook ownership', async () => {
   const f = fixture({ready:false}); await f.plugin.onload();
