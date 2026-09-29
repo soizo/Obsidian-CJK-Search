@@ -9,7 +9,7 @@ const { installEditorSuggestions } = require('./editor-suggest.js');
 const data = require('../data/character-data.json');
 const { localeIds, getStrings } = require('./strings.js');
 const DEFAULT_SETTINGS = {language:'auto', searchEnabled:true, findEnabled:true, quickSwitcherEnabled:true, graphEnabled:true, graphAdvancedQueries:false, tagsEnabled:true, internalLinksEnabled:true, fullCompatibility:true};
-const build = 'editor-suggestions-0.5.0';
+const build = 'editor-suggestions-0.5.1';
 
 function log(event, details = {}, level = 'info') {
   if (level === 'info' && event !== 'diagnostics') return;
