@@ -248,6 +248,41 @@ test('late and removed panels and foreign hook ownership', async () => {
   const foreign = function(){}; v.view.renderSearchInfo = foreign;
   f.plugin.unload(); assert.equal(v.view.renderSearchInfo,foreign);
 });
+test('deferred search leaves stay quiet and attach once when the real view loads', async () => {
+  const f = fixture(), placeholder = {};
+  const leaf = {isDeferred:true,view:placeholder};
+  f.workspace.leaves = [leaf];
+  await f.plugin.onload();
+  f.workspace.change();
+  await f.plugin.setSetting('searchEnabled',false);
+  await f.plugin.setSetting('searchEnabled',true);
+  assert.deepEqual(f.notices, []);
+  assert.deepEqual(f.logs, []);
+  assert.equal(f.plugin.patched.size,0);
+  assert.equal(leaf.view,placeholder,'Do not force a deferred view to load');
+  const v = f.makeView(), original = v.view.renderSearchInfo;
+  leaf.view = v.view; leaf.isDeferred = false;
+  f.workspace.change();
+  const wrapper = v.view.renderSearchInfo;
+  f.workspace.change();
+  assert.equal(v.view.renderSearchInfo,wrapper);
+  const searched = v.search();
+  assert.notEqual(v.view.searchQuery.matcher,searched.oldMatcher);
+  assert.equal(f.plugin.patched.get(v.view).counts.expanded,1);
+  assert.deepEqual(f.notices, []);
+  f.plugin.unload();
+  assert.equal(v.view.renderSearchInfo,original);
+});
+test('a loaded incompatible search leaf still warns after being deferred', async () => {
+  const f = fixture(), leaf = {isDeferred:true,view:{}};
+  f.workspace.leaves = [leaf]; await f.plugin.onload();
+  assert.equal(f.notices.length,0);
+  leaf.isDeferred = false; f.workspace.change(); f.workspace.change();
+  assert.equal(f.notices.length,1);
+  assert(f.plugin.warned.has('incompatible-view'));
+  assert.equal(f.plugin.patched.size,0);
+  f.plugin.unload();
+});
 test('unloading before layout-ready cannot resurrect a hook', async () => {
   const f = fixture({ready:false}); const v = f.makeView(), original = v.view.renderSearchInfo;
   f.workspace.leaves = [{view:v.view}]; await f.plugin.onload(); f.plugin.unload(); f.workspace.fireLayoutReady();

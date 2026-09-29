@@ -223,8 +223,9 @@ module.exports = class CjkSearchPlugin extends Plugin {
     }
     log('scan-views', { reason, found: leaves.length, previouslyPatched: this.patched.size });
     if (!leaves.length) log('waiting-for-search', { action: 'Open native global search (Cmd/Ctrl+Shift+F)' });
-    for (const { view } of leaves) {
-      if (this.patched.has(view)) continue;
+    for (const { view, isDeferred } of leaves) {
+      // Deferred search leaves are placeholders; layout-change retries once loaded.
+      if (isDeferred || this.patched.has(view)) continue;
       const original = view.renderSearchInfo;
       if (typeof original !== 'function') {
         log('incompatible-view', { missing: 'renderSearchInfo', action: 'native-search-unchanged' }, 'warn');
