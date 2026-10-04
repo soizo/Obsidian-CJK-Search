@@ -7,6 +7,7 @@
     "searchEnabled": {"name":"Search","description":"Search across your vault.","unavailable":"Search is disabled. Enable Search in Core plugins to use this feature."},
     "findEnabled": {"name":"Find","description":"Search within the current Markdown note. Replacements stay unchanged."},
     "quickSwitcherEnabled": {"name":"Quick switcher","description":"Match file names, paths, and aliases.","unavailable":"Quick switcher is disabled. Enable Quick switcher in Core plugins to use this feature."},
+    "folderSearchEnabled": {"name":"Folder search","description":"Match folder names and paths when moving files. Move actions stay unchanged."},
     "graphEnabled": {"name":"Graph view","description":"Match equivalent characters in global and local graph filters and groups.","unavailable":"Enable Graph view in Core plugins to use this feature."},
     "graphAdvancedQueries": {"name":"Advanced graph queries","description":"Also match equivalent characters in path:, file:, and tag: filters. Exclusions also include equivalent forms. Requires Graph view enhancement."},
     "tagsEnabled": {"name":"Tags","description":"Suggest equivalent tags after # in the Markdown editor. Insert the original tag."},

@@ -59,6 +59,7 @@ function fixture({ table = data, ready = true, saved = {}, failSave = false, fai
   };
   const app = {workspace};
   const api = {Plugin, Component, PluginSettingTab, Setting, Platform:{}, apiVersion:'1.13.7', getLanguage:()=>language,
+    FuzzySuggestModal:class {getSuggestions(){return [];}},TAbstractFile:class {},TFolder:class {},
     Notice:class { constructor(text) { notices.push(text); } }};
   const nativeRequire = createRequire(sourcePath);
   const context = { module:{exports:{}}, require: name => name === 'obsidian' ? api : name === '../data/character-data.json' ? table : nativeRequire(name),
@@ -85,7 +86,7 @@ function fixture({ table = data, ready = true, saved = {}, failSave = false, fai
 }
 
 test('per-entry choices default on, preserve old booleans and never write on load', async () => {
-  for(const key of ['searchEnabled','findEnabled','quickSwitcherEnabled','graphEnabled','tagsEnabled','internalLinksEnabled']) {
+  for(const key of ['searchEnabled','findEnabled','quickSwitcherEnabled','folderSearchEnabled','graphEnabled','tagsEnabled','internalLinksEnabled']) {
     for(const [value,expected] of [[undefined,true],[false,false],[true,true],['false',true]]) {
       const saved={fullCompatibility:false,keep:'original',...(value===undefined?{}:{[key]:value})};
       const f=fixture({saved});await f.plugin.onload();
@@ -114,7 +115,7 @@ test('entry controls restore native search, stay independent, and do not leak li
   await f.plugin.setSetting('searchEnabled',true);
   result=v.search();assert.notEqual(v.view.searchQuery.matcher,result.oldMatcher);
   const listeners=f.listenerCount('layout-change');
-  for(let i=0;i<3;i++)for(const key of ['findEnabled','quickSwitcherEnabled','graphEnabled','tagsEnabled','internalLinksEnabled']) {
+  for(let i=0;i<3;i++)for(const key of ['findEnabled','quickSwitcherEnabled','folderSearchEnabled','graphEnabled','tagsEnabled','internalLinksEnabled']) {
     await f.plugin.setSetting(key,false);await f.plugin.setSetting(key,true);
   }
   assert.equal(f.listenerCount('layout-change'),listeners,'Toggling must not accumulate workspace listeners');
@@ -140,11 +141,11 @@ test('concurrent setting writes preserve each choice and failures leave active b
   await assert.rejects(()=>bad.plugin.setSetting('findEnabled',false));assert.equal(bad.plugin.settings.findEnabled,true);
   f.plugin.unload();bad.plugin.unload();
 });
-test('settings expose eight usable English controls, rollback failed changes and load quietly', async () => {
+test('settings expose nine usable English controls, rollback failed changes and load quietly', async () => {
   const f=fixture({failSave:true});await f.plugin.onload();
   assert.equal(f.notices.length,0,'Successful loading must not display a developer notification');
   f.plugin.settingTab.display();const controls=f.rows.filter(row=>row.toggle);
-  assert.equal(controls.length,8);assert(controls.every(row=>typeof row.toggle.change==='function'));
+  assert.equal(controls.length,9);assert(controls.every(row=>typeof row.toggle.change==='function'));
   assert(!/[\u3400-\u9fff]/u.test(f.rows.map(row=>row.name+' '+row.desc).join(' ')+' '+f.commands.map(c=>c.name).join(' ')));
   controls[0].toggle.setValue(false);await controls[0].toggle.change(false);
   assert.equal(controls[0].toggle.value,true);assert.equal(f.plugin.settings.searchEnabled,true);

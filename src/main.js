@@ -1,14 +1,15 @@
 'use strict';
 const { Plugin, Component, Notice, PluginSettingTab, Setting, Platform, apiVersion,
-  prepareFuzzySearch, prepareSimpleSearch, parseFrontMatterAliases, getLanguage } = require('obsidian');
+  prepareFuzzySearch, prepareSimpleSearch, parseFrontMatterAliases, getLanguage, FuzzySuggestModal, TAbstractFile, TFolder } = require('obsidian');
 const { createExpander } = require('./matcher.js');
 const { installFind } = require('./find.js');
 const { installOpenFile } = require('./open-file.js');
+const { installFolderSearch } = require('./folder-search.js');
 const { installGraph } = require('./graph.js');
 const { installEditorSuggestions } = require('./editor-suggest.js');
 const data = require('../data/character-data.json');
 const { localeIds, getStrings } = require('./strings.js');
-const DEFAULT_SETTINGS = {language:'auto', searchEnabled:true, findEnabled:true, quickSwitcherEnabled:true, graphEnabled:true, graphAdvancedQueries:false, tagsEnabled:true, internalLinksEnabled:true, fullCompatibility:true};
+const DEFAULT_SETTINGS = {language:'auto', searchEnabled:true, findEnabled:true, quickSwitcherEnabled:true, folderSearchEnabled:true, graphEnabled:true, graphAdvancedQueries:false, tagsEnabled:true, internalLinksEnabled:true, fullCompatibility:true};
 const build = 'editor-suggestions-0.5.1';
 
 function log(event, details = {}, level = 'info') {
@@ -29,7 +30,7 @@ class CompatibilitySettings extends PluginSettingTab {
         catch { dropdown.setValue(this.plugin.settings.language); }
         finally { dropdown.setDisabled(false); }
       }));
-    for (const [key, core] of [['searchEnabled','global-search'],['findEnabled',null],['quickSwitcherEnabled','switcher'],['graphEnabled','graph'],['graphAdvancedQueries',null],['tagsEnabled',null],['internalLinksEnabled',null],['fullCompatibility',null]]) {
+    for (const [key, core] of [['searchEnabled','global-search'],['findEnabled',null],['quickSwitcherEnabled','switcher'],['folderSearchEnabled',null],['graphEnabled','graph'],['graphAdvancedQueries',null],['tagsEnabled',null],['internalLinksEnabled',null],['fullCompatibility',null]]) {
       if (key === 'fullCompatibility') new Setting(this.containerEl).setName(text.matching).setHeading();
       const copy = text.settings[key];
       const unavailable = core && !this.app.internalPlugins?.getEnabledPluginById?.(core);
@@ -98,12 +99,14 @@ module.exports = class CjkSearchPlugin extends Plugin {
     };
     this.updateEnhancement('findEnabled');
     this.updateEnhancement('quickSwitcherEnabled');
+    this.updateEnhancement('folderSearchEnabled');
     this.updateEnhancement('graphEnabled');
     this.updateEnhancement('tagsEnabled');
     this.register(() => this.stopEditorSuggestions?.());
     this.register(() => this.graphController?.dispose());
     this.register(() => this.stopFind?.());
     this.register(() => this.stopQuickSwitcher?.());
+    this.register(() => this.stopFolderSearch?.());
     this.registerEvent(this.app.workspace.on('layout-change', () => this.attachViews('layout-change')));
     this.app.workspace.onLayoutReady(() => {
       if (!this.active) return;
@@ -166,6 +169,10 @@ module.exports = class CjkSearchPlugin extends Plugin {
         this.stopQuickSwitcher?.();
         this.stopQuickSwitcher = this.settings.quickSwitcherEnabled
           ? installOpenFile(this,this.reportSurface,{prepareFuzzySearch,prepareSimpleSearch,parseFrontMatterAliases}) : null;
+      } else if (key === 'folderSearchEnabled') {
+        this.stopFolderSearch?.();
+        this.stopFolderSearch = this.settings.folderSearchEnabled
+          ? installFolderSearch(this,this.reportSurface,{prepareFuzzySearch,FuzzySuggestModal,TAbstractFile,TFolder}) : null;
       } else if (key === 'tagsEnabled' || key === 'internalLinksEnabled') {
         this.stopEditorSuggestions?.();
         this.stopEditorSuggestions = this.settings.tagsEnabled || this.settings.internalLinksEnabled
@@ -200,7 +207,7 @@ module.exports = class CjkSearchPlugin extends Plugin {
     log('diagnostics', { build, version: this.manifest.version, obsidianApi: apiVersion,
       unicodeVersion: data?.unicodeVersion, openccVersion: data?.openccVersion,
       dataReady: !!this.expander, fullCompatibility: this.settings.fullCompatibility,
-      enhancements: {search:this.settings.searchEnabled,find:this.settings.findEnabled,quickSwitcher:this.settings.quickSwitcherEnabled,graph:this.settings.graphEnabled,graphAdvancedQueries:this.settings.graphAdvancedQueries,tags:this.settings.tagsEnabled,internalLinks:this.settings.internalLinksEnabled},
+      enhancements: {search:this.settings.searchEnabled,find:this.settings.findEnabled,quickSwitcher:this.settings.quickSwitcherEnabled,folderSearch:this.settings.folderSearchEnabled,graph:this.settings.graphEnabled,graphAdvancedQueries:this.settings.graphAdvancedQueries,tags:this.settings.tagsEnabled,internalLinks:this.settings.internalLinksEnabled},
       searchViews: leaves.length, rawQueryLogging: false, lastSurfaceEvents: this.surfaceEvents,
       views: leaves.map(({ view }) => {
         const record = this.patched.get(view);

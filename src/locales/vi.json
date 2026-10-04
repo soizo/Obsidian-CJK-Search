@@ -4,6 +4,7 @@
     "searchEnabled":{"name":"Tìm kiếm","description":"Tìm kiếm trong toàn bộ vault.","unavailable":"Tìm kiếm đang bị tắt. Hãy bật Tìm kiếm trong các plugin lõi để dùng tính năng này."},
     "findEnabled":{"name":"Tìm","description":"Tìm trong ghi chú Markdown hiện tại. Thao tác thay thế không thay đổi."},
     "quickSwitcherEnabled":{"name":"Trình chuyển nhanh","description":"Đối sánh tên tệp, đường dẫn và bí danh.","unavailable":"Trình chuyển nhanh đang bị tắt. Hãy bật Trình chuyển nhanh trong các plugin lõi để dùng tính năng này."},
+    "folderSearchEnabled":{"name":"Tìm thư mục","description":"Đối sánh tên và đường dẫn thư mục khi di chuyển tệp. Thao tác di chuyển không thay đổi."},
     "graphEnabled":{"name":"Chế độ xem đồ thị","description":"Đối sánh các ký tự tương đương trong bộ lọc và nhóm của đồ thị toàn cục và cục bộ.","unavailable":"Hãy bật Chế độ xem đồ thị trong các plugin lõi để dùng tính năng này."},
     "graphAdvancedQueries":{"name":"Truy vấn đồ thị nâng cao","description":"Cũng đối sánh ký tự tương đương trong các bộ lọc path:, file: và tag:. Điều kiện loại trừ cũng bao gồm các dạng tương đương. Cần bật tăng cường đồ thị."},
     "tagsEnabled":{"name":"Thẻ","description":"Gợi ý các thẻ tương đương sau # trong trình soạn thảo Markdown. Chèn thẻ gốc."},

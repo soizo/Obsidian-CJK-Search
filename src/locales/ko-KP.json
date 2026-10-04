@@ -4,6 +4,7 @@
     "searchEnabled":{"name":"검색","description":"보관함 전체를 검색합니다.","unavailable":"검색이 비활성화되어 있습니다. 이 기능을 사용하려면 핵심 플러그인에서 검색을 켜십시오."},
     "findEnabled":{"name":"찾기","description":"현재 Markdown 문서 안을 검색합니다. 바꾸기는 변경되지 않습니다."},
     "quickSwitcherEnabled":{"name":"빠른 전환","description":"파일 이름, 경로, 별칭을 검색합니다.","unavailable":"빠른 전환이 비활성화되어 있습니다. 이 기능을 사용하려면 핵심 플러그인에서 빠른 전환을 켜십시오."},
+    "folderSearchEnabled":{"name":"폴더 검색","description":"파일을 옮길 때 폴더 이름과 경로를 검색합니다. 이동 동작은 변경되지 않습니다."},
     "graphEnabled":{"name":"그래프 보기","description":"전역 및 국부 그래프의 필터와 묶음에서 같은 문자를 검색합니다.","unavailable":"이 기능을 사용하려면 핵심 플러그인에서 그래프 보기를 켜십시오."},
     "graphAdvancedQueries":{"name":"고급 그래프 질의","description":"path:, file:, tag: 필터에서도 같은 문자를 검색합니다. 제외 조건에도 같은 형식을 포함합니다. 그래프 보기 개선 기능이 필요합니다."},
     "tagsEnabled":{"name":"꼬리표","description":"Markdown 편집기에서 # 뒤에 같은 꼬리표를 제안합니다. 원래 꼬리표를 넣습니다."},

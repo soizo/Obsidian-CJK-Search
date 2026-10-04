@@ -15,6 +15,7 @@
       "name": "快速切换", "description": "匹配文件名、路徑和别名。",
       "unavailable": "快速切换已禁用。請在核心插件中啟用快速切换以使用此功能。"
     },
+    "folderSearchEnabled": {"name":"資料夾搜尋","description":"移動檔案時比對資料夾名稱和路徑。移動操作保持不變。"},
     "graphEnabled": {
       "name": "關係圖譜", "description": "在全局和局部關係圖譜的篩選條件與分組中匹配等價字符。",
       "unavailable": "請在核心插件中啟用關係圖譜以使用此功能。"

@@ -15,6 +15,7 @@
       "name": "快速切换", "description": "匹配文件名、路径和别名。",
       "unavailable": "快速切换已禁用。请在核心插件中启用快速切换以使用此功能。"
     },
+    "folderSearchEnabled": {"name":"文件夹搜索","description":"移动文件时匹配文件夹名称和路径。移动操作保持不变。"},
     "graphEnabled": {
       "name": "关系图谱", "description": "在全局和局部关系图谱的筛选条件与分组中匹配等价字符。",
       "unavailable": "请在核心插件中启用关系图谱以使用此功能。"

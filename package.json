@@ -9,6 +9,7 @@
     "build": "node scripts/build.cjs",
     "test:native": "node experiments/native-search-spike/run.cjs --plugin-dir dist --full-data",
     "test:surfaces": "node experiments/native-search-spike/run.cjs --plugin-dir dist --surfaces",
+    "test:folders": "node experiments/native-search-spike/run.cjs --plugin-dir dist --folders",
     "test:completions": "node experiments/native-search-spike/run.cjs --plugin-dir dist --completions",
     "test:graph": "node experiments/native-search-spike/run.cjs --plugin-dir dist --graph",
     "test:settings": "node experiments/native-search-spike/run.cjs --plugin-dir dist --settings",

@@ -46,6 +46,7 @@ Windows/Linux 对应使用 Ctrl；以宿主实际快捷键设置为准。
 - **Search**：全库搜索增强。
 - **Find**：当前 Markdown 笔记查找增强。
 - **Quick switcher**：文件名、路径及别名增强。
+- **Folder search**：Files 右键「移动文件」中的文件夹名称／路径增强，也覆盖移动当前文件的命令；保留原生移动限制和新建文件夹行为。
 - **Graph view**：全局／局部图谱的 Filters 和 Groups 增强。
 - **Advanced graph queries**：仅为图谱增强 `path:`、`file:`、`tag:` 及原生逻辑组合，默认关闭。
 - **Tags**：Markdown 编辑器输入 `#` 时的标签补全增强。
@@ -62,10 +63,11 @@ Windows/Linux 对应使用 Ctrl；以宿主实际快捷键设置为准。
 - 不增强 PDF、Canvas、Bases、网页或嵌入编辑器。Find 仅覆盖顶层 Markdown。
 - 复杂全库查询、正则、属性条件和部分 Graph 子树查询会保持原生规则；未知结构或超限时整条查询回退原生。
 - 标签／双链仅增强顶层 Markdown 编辑器的 `#` 和 `[[` 原生补全。
+- 文件夹搜索仅增强原生移动弹窗，不覆盖第三方插件的目录选择器；移动操作、目标目录和原名仍由 Obsidian 处理。
 - 输入超过 256 个码位、展开超过 65,536 个 UTF-16 单元或 4,096 个分支节点时回退原生。
 - macOS / Obsidian 1.13.7 已实测；iOS 新入口等待复测，Android、Windows、Linux 未完成验收。
 
-详细记录见[验证报告](docs/research/user-settings.md)、[编辑器补全报告](docs/research/editor-suggestions.md)、[图谱报告](docs/research/graph-view.md)、[数据报告](data/report.json)和[项目进度](TODO.md)。
+详细记录见[文件夹搜索报告](docs/research/folder-search.md)、[验证报告](docs/research/user-settings.md)、[编辑器补全报告](docs/research/editor-suggestions.md)、[图谱报告](docs/research/graph-view.md)、[数据报告](data/report.json)和[项目进度](TODO.md)。
 
 ## 隐私与问题反馈
 
@@ -85,6 +87,7 @@ npm test
 npm run build
 npm run test:native
 npm run test:surfaces
+npm run test:folders
 npm run test:settings
 npm run test:graph
 npm run test:completions

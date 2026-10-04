@@ -11,6 +11,7 @@ const { createHash } = require('node:crypto');
 const { chromium } = require('playwright');
 
 (async () => {
+  const folders = process.argv.includes('--folders');
   const completions = process.argv.includes('--completions');
   const graph = process.argv.includes('--graph');
   const fullData = process.argv.includes('--full-data');
@@ -50,6 +51,7 @@ const { chromium } = require('playwright');
   if (surfaces) Object.assign(fixtures, require('./surfaces.cjs').fixtures);
   if (graph) Object.assign(fixtures, require('./graph.cjs').fixtures);
   if (completions) Object.assign(fixtures, require('./completions.cjs').fixtures);
+  if (folders) Object.assign(fixtures, require('./folders.cjs').fixtures);
   for (const [name, content] of Object.entries(fixtures)) {
     await fs.mkdir(path.dirname(path.join(vault, name)), {recursive:true});
     await fs.writeFile(path.join(vault, name), content);
@@ -58,7 +60,7 @@ const { chromium } = require('playwright');
     updateDisabled: true,
     vaults: { cjkprobe000000001: { path: vault, ts: Date.now(), open: true } },
   }));
-  await fs.writeFile(path.join(vault, '.obsidian', 'core-plugins.json'), JSON.stringify(graph ? ['global-search','graph'] : surfaces ? ['global-search', 'switcher'] : ['global-search']));
+  await fs.writeFile(path.join(vault, '.obsidian', 'core-plugins.json'), JSON.stringify(folders ? ['global-search','file-explorer'] : graph ? ['global-search','graph'] : surfaces ? ['global-search', 'switcher'] : ['global-search']));
   console.log('ISOLATED RUN', root);
   let application;
   let child;
@@ -106,9 +108,9 @@ const { chromium } = require('playwright');
     assert.equal(await fs.realpath(evidence.actualVault), await fs.realpath(vault), 'Must only test the isolated vault');
     await page.waitForFunction(count => app.vault.getMarkdownFiles().length === count, Object.keys(fixtures).length);
     console.log('VAULT READY', evidence.actualVault);
-    if (graph || completions) {
-      const checks=require(completions?'./completions.cjs':'./graph.cjs');
-      evidence[completions?'completionBaseline':'graphBaseline']=await checks.captureBaseline(page);
+    if (graph || completions || folders) {
+      const checks=require(folders?'./folders.cjs':completions?'./completions.cjs':'./graph.cjs');
+      evidence[folders?'folderBaseline':completions?'completionBaseline':'graphBaseline']=await checks.captureBaseline(page);
       const pluginDir=path.join(vault,'.obsidian/plugins/cjk-search-probe');
       await fs.mkdir(pluginDir,{recursive:true});evidence.pluginHashes={};
       for(const name of ['main.js','manifest.json']) {
@@ -117,7 +119,7 @@ const { chromium } = require('playwright');
         evidence.pluginHashes[name]=createHash('sha256').update(bytes).digest('hex');
       }
       await page.evaluate(async()=>{await app.plugins.loadManifests();await app.plugins.setEnable(true);await app.plugins.enablePlugin('cjk-search-probe');});
-      await (completions?checks.verifyCompletions:checks.verifyGraph)(page,context,evidence);
+      await (folders?checks.verifyFolders:completions?checks.verifyCompletions:checks.verifyGraph)(page,context,evidence);
       for(const [name,original] of Object.entries(fixtures)) assert.equal(await fs.readFile(path.join(vault,name),'utf8'),original);
     } else if (surfaces) {
       const checks = require('./surfaces.cjs');

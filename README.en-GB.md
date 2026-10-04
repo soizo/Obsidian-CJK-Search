@@ -47,6 +47,7 @@ Under Settings → CJK Search, you can toggle each feature separately:
 | Search | Match equivalent characters across the vault |
 | Find | Match equivalent characters in the current note; replacements still use Obsidian's original rules |
 | Quick switcher | Match equivalent characters in file names, paths and aliases, alongside native fuzzy search |
+| Folder search | Match folder names and paths in the Files → Move file dialog and the move-current-file command; keep native move restrictions and folder creation |
 | Compatibility characters | Also match pairs such as `① / 1`, `² / 2`, `Ａ / A` and `ﬃ / ffi` |
 
 The switches are independent. Turning off an enhancement restores the original behaviour for that search feature. Re-enter your query after changing a setting. Search and Quick switcher must also be enabled in Obsidian's Core plugins.
@@ -56,6 +57,7 @@ The switches are independent. Turning off an enhancement restores the original b
 - Tested on macOS with Obsidian 1.13.7. Find and Quick switcher on iOS still need re-testing; Android, Windows and Linux have not been fully verified.
 - Does not extend Graph view search or filtering, or support PDF, Canvas, Bases, web pages or embedded editors.
 - Complex vault queries containing `path:`, `file:`, quotes, brackets, negation or regular expressions follow Obsidian's original rules.
+- Folder search enhances the native move dialog, not third-party folder pickers. Obsidian still owns move actions and original folder names.
 - Matches equivalent characters only. It does not convert regional phrases, match look-alike characters or perform full NFKC normalisation.
 - Character data is selected from Unicode 18.0.0 and OpenCC 1.4.2. It does not cover every variant character or regional standard.
 
@@ -77,6 +79,7 @@ You need Node.js 22, npm and Python 3. Run these commands in the project directo
 npm ci
 npm test
 npm run build
+npm run test:folders
 ```
 
 The build is written to `dist/`. Copy all its contents into the plugin directory shown above. Generated character data is already included in the repository; a normal build does not need to regenerate it.

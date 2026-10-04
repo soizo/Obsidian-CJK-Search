@@ -4,6 +4,7 @@
     "searchEnabled":{"name":"検索","description":"Vault 全体を検索します。","unavailable":"検索が無効です。この機能を使うにはコアプラグインで検索を有効にしてください。"},
     "findEnabled":{"name":"検索（現在のノート）","description":"現在の Markdown ノート内を検索します。置換は変更されません。"},
     "quickSwitcherEnabled":{"name":"クイックスイッチャー","description":"ファイル名、パス、エイリアスを照合します。","unavailable":"クイックスイッチャーが無効です。この機能を使うにはコアプラグインで有効にしてください。"},
+    "folderSearchEnabled":{"name":"フォルダー検索","description":"ファイル移動時にフォルダー名とパスを照合します。移動操作は変更されません。"},
     "graphEnabled":{"name":"グラフビュー","description":"グローバル／ローカルグラフのフィルターとグループで同等の文字を照合します。","unavailable":"この機能を使うにはコアプラグインでグラフビューを有効にしてください。"},
     "graphAdvancedQueries":{"name":"グラフの詳細クエリ","description":"path:、file:、tag: フィルターでも同等の文字を照合します。除外条件にも同等の形式を含めます。グラフビュー拡張が必要です。"},
     "tagsEnabled":{"name":"タグ","description":"Markdown エディターで # の後に同等のタグを提案します。元のタグを挿入します。"},
