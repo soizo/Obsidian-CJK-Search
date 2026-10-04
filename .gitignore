@@ -2,7 +2,8 @@
 /node_modules/
 /dist/
 
-# Local agent state, backups, and caches
+# Local project notes, agent state, backups, and caches
+/TODO.md
 /.pi/
 __pycache__/
 *.py[cod]
