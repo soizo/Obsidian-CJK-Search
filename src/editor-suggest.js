@@ -31,28 +31,32 @@ function augmentLinks(manager,query,native,expander,fullCompatibility,api) {
     manager.fileSuggestions.length<10000?api.prepareFuzzySearch:api.prepareSimpleSearch);
   const rows=native.slice(),seen=new Map();
   function key(row){return JSON.stringify([row.type,row.path,row.alias]);}
-  for (const row of native) if (row.file) {
-    if (!seen.has(row.file)) seen.set(row.file,new Set());
-    seen.get(row.file).add(key(row));
+  for (const row of native) {
+    const file=row.file||null;
+    if (!seen.has(file)) seen.set(file,new Set());
+    seen.get(file).add(key(row));
   }
   for (const candidate of manager.fileSuggestions) {
-    if (!candidate.file) continue; // Unresolved link text remains exclusively native.
     if (typeof candidate.path!=='string') throw new TypeError('path-interface');
-    const row={type:candidate.alias?'alias':'file',file:candidate.file,path:candidate.path};
-    if (candidate.alias) row.alias=candidate.alias;
-    const keys=seen.get(row.file)||new Set();
+    const row=candidate.file?{type:candidate.alias?'alias':'file',file:candidate.file,path:candidate.path}:
+      {type:'linktext',path:candidate.path};
+    if (candidate.file&&candidate.alias) row.alias=candidate.alias;
+    const keys=seen.get(candidate.file||null)||new Set();
     if (keys.has(key(row))) continue;
     let found;
-    if (row.type==='alias') found=match(row.alias);
+    if (row.type==='linktext') found=match(row.path);
+    else if (row.type==='alias') found=match(row.alias);
     else {
       const start=row.path.lastIndexOf('/')+1;
       found=match(row.path.slice(start),start);
       if (!found) {found=match(row.path);if(found)found.score-=1;}
     }
     if (!found) continue;
-    const downranked=manager.app.metadataCache.isUserIgnored(row.file.path);
-    if (downranked) found.score-=10;
-    rows.push({...row,...found,downranked});keys.add(key(row));seen.set(row.file,keys);
+    if (row.file) {
+      row.downranked=manager.app.metadataCache.isUserIgnored(row.file.path);
+      if (row.downranked) found.score-=10;
+    }
+    rows.push({...row,...found});keys.add(key(row));seen.set(candidate.file||null,keys);
   }
   // The original link provider sorts and handles the no-result/create row.
   return rows;

@@ -26,19 +26,40 @@ test('links use native candidates, preserve files, aliases, unresolved rows and 
  ]};
  const native=[{type:'linktext',path:'体原生',score:1,matches:[[0,1]]}];
  const rows=augmentLinks(manager,'体',native,expander,false,api);
- assert.equal(rows[0],native[0]);assert.equal(rows.length,3);assert.equal(rows[1].file,file);assert.equal(rows[1].path,'目录/體');
- assert.deepEqual(rows[1].matches,[[3,4]]);assert.equal(rows[2].downranked,true);assert.equal(rows[2].score,0);
+ assert.equal(rows[0],native[0]);assert.equal(rows.length,4);assert.equal(rows[1].file,file);assert.equal(rows[1].path,'目录/體');
+ assert.deepEqual(rows[1].matches,[[3,4]]);assert.equal(rows[2].type,'linktext');assert.equal(rows[2].path,'體未创建');
+ assert.equal(rows[3].downranked,true);assert.equal(rows[3].score,0);
  const alias=augmentLinks(manager,'发型',[],expander,false,api)[0];assert.equal(alias.alias,'發型');assert.equal(alias.file,file);
  assert.equal(augmentLinks(manager,'',native,expander,false,api),native);
  const row={type:'file',file,path:'目录/體',score:55,matches:[[3,4]]};
  assert.deepEqual(augmentLinks(manager,'体',[row],expander,false,api).filter(r=>r.file===file),[row]);
  manager.fileSuggestions=[{file,path:'前／體'}];assert.equal(augmentLinks(manager,'体',[],expander,true,api)[0].score,10);
 });
+test('unresolved links match equivalent characters as native linktext rows',()=>{
+ const pool=[{file:null,path:'目录/體未创建'},{file:null,path:'目录/體未创建'},
+  {file:null,path:'發未创建'},{file:null,path:'①未创建'},{file:null,path:'土未创建'}];
+ const manager={app:{metadataCache:{isUserIgnored:()=>{throw Error('Unresolved links have no file to downrank');}}},fileSuggestions:pool};
+ const native=[{type:'linktext',path:'体原生',score:20,matches:[[0,1]]}];
+ const rows=augmentLinks(manager,'体',native,expander,false,api);
+ assert.equal(rows[0],native[0]);
+ assert.deepEqual(rows.slice(1),[{type:'linktext',path:'目录/體未创建',score:10,matches:[[3,4]]}]);
+ assert.deepEqual(augmentLinks(manager,'目录',[],expander,false,api),
+  [{type:'linktext',path:'目录/體未创建',score:10,matches:[[0,2]]}]);
+ assert.deepEqual(augmentLinks(manager,'发',[],expander,false,api),
+  [{type:'linktext',path:'發未创建',score:10,matches:[[0,1]]}]);
+ assert.deepEqual(augmentLinks(manager,'1',[],expander,true,api),
+  [{type:'linktext',path:'①未创建',score:10,matches:[[0,1]]}]);
+ assert.deepEqual(augmentLinks(manager,'1',[],expander,false,api),[]);
+ const existing={type:'linktext',path:'目录/體未创建',score:99,matches:[[3,4]]};
+ assert.deepEqual(augmentLinks(manager,'体',[existing],expander,false,api),[existing]);
+ assert.equal(augmentLinks(manager,'',native,expander,true,api),native);
+ assert.deepEqual(pool[0],{file:null,path:'目录/體未创建'});
+});
 test('instance hooks preserve foreign ownership, retire references and cancel late supplements',async()=>{
  const editor={},file={path:'體.md',extension:'md'},events=new Set(),logs=[];
  const context={editor,file,query:'研'};
  const tags={onTrigger:()=>({query:'x',start:{ch:0},end:{ch:2}}),getSuggestions:c=>c.query===''?[{tag:'硏究',score:0,matches:null}]:[]};
- const target={app:{metadataCache:{isUserIgnored:()=>false}},fileSuggestions:[{file,path:'體'}],getFileSuggestions:async()=>[]};
+ const target={app:{metadataCache:{isUserIgnored:()=>false}},fileSuggestions:[{file,path:'體'},{file:null,path:'體未创建'}],getFileSuggestions:async()=>[]};
  const links={context:{editor,file,query:'体'},onTrigger:()=>({query:'x',start:{ch:2},end:{ch:3}}),suggestManager:target};
  const workspace={activeLeaf:{view:{editor}},editorSuggest:{suggests:[links,tags]},on(){const e={};events.add(e);return e;},offref(e){events.delete(e);}};
  const plugin={active:true,expander,settings:{tagsEnabled:true,internalLinksEnabled:true},app:{workspace}};
@@ -50,11 +71,15 @@ test('instance hooks preserve foreign ownership, retire references and cancel la
  stop=installEditorSuggestions(plugin,(...a)=>logs.push(a),api);assert.equal(tags.getSuggestions(context)[0].tag,'硏究');assert.deepEqual(old.call(tags,context),[]);
  assert.deepEqual(await target.getFileSuggestions({isCancelled:()=>true},'体'),[]);
  plugin.settings.tagsEnabled=false;assert.deepEqual(tags.getSuggestions(context),[]);
- assert.equal((await target.getFileSuggestions({isCancelled:()=>false},'体'))[0].file,file);
+ const linkRows=await target.getFileSuggestions({isCancelled:()=>false},'体');
+ assert.equal(linkRows[0].file,file);assert.equal(linkRows[1].path,'體未创建');assert.equal(linkRows[1].type,'linktext');
+ plugin.settings.internalLinksEnabled=false;assert.deepEqual(await target.getFileSuggestions({isCancelled:()=>false},'体'),[]);
  plugin.settings.tagsEnabled=true;assert.deepEqual(tags.getSuggestions({...context,file:{extension:'canvas'}}),[]);
  stop();assert.equal(events.size,0);
 });
 test('oversized input or bad candidate aborts rather than returning partial supplements',()=>{
  assert.throws(()=>augmentTags('体'.repeat(257),[],[],expander,true,api),/limit/);
  const native=[];assert.throws(()=>augmentTags('体',native,[{tag:'體'},{tag:1}],expander,true,api));assert.deepEqual(native,[]);
+ const manager={fileSuggestions:[{file:null,path:'體'},{file:null,path:1}]};
+ assert.throws(()=>augmentLinks(manager,'体',native,expander,true,api),/path-interface/);assert.deepEqual(native,[]);
 });

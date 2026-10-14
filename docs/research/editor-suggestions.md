@@ -32,3 +32,13 @@
 - 备份：`.pi/plugin-backups/before-install-Epv89G/`。
 
 证据目录：`docs/research/evidence/editor-suggestions/`，包含四份 JSON、`verification.log`、保留的首轮日志、截图、`pre-install-hashes.json` 与 `installation.json`。该目录仅本地保留，不纳入 Git。
+
+## 未创建双链目标的等价匹配（2026-10-15）
+
+`[[` 补全也匹配原生候选池中的未解析链接。例如，其他笔记已引用 `[[體未创建]]` 时，输入 `[[体未创建` 可找到该目标；选择后插入 `[[體未创建]]`，不创建文件。
+
+根因是 `augmentLinks` 跳过所有没有 `file` 的候选。现在以原生 `linktext` 类型匹配完整链接路径，不应用已创建文件的文件名优先评分或忽略文件降权。原生候选对象与分数保留；重复目标只追加一次。没有任何笔记引用的新目标仍由原生新建／按输入插入行为处理。
+
+- 单元回归先失败后通过，覆盖原路径、高亮、去重、兼容开关、取消／停用和坏候选回退。完整 `npm test` 通过（10 Python＋72 Node），`npm run build` 通过，字表未变化。
+- CLI 回归：`node experiments/native-search-spike/completions-cli.cjs dist`。使用独立 HOME、profile 和合成库，先检查原生未解析候选，再检查插件匹配及原生插入；不打开用户库。Obsidian 1.14.4 / macOS 上，旧产物按预期在 `体未创建` 处失败，新产物回归通过：简繁双向、完整路径、`①／1` 开关、原名插入、已有文件／别名、非等价负例、新建输入、停用与卸载恢复、夹具笔记不变。每次运行在打印的临时目录保存 `evidence.json`。
+- LSP 三文件无错误报告，仅一文件确认 clean，另外两文件 inconclusive。此次不覆盖移动端或其他搜索入口，也未更新用户库安装。
